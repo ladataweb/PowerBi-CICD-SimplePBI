@@ -27,7 +27,7 @@ from simplepbi.fabric import core
 
 # Set variables
 Throw_exception = ""
-LaDataWebKey = sys.argv[1]
+Workspace = sys.argv[1]
 retries = 2
 
 # Get list of file path folders with changes
