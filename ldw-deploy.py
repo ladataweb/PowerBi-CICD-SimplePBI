@@ -28,7 +28,6 @@ from simplepbi.fabric import core
 # Set variables
 Throw_exception = ""
 Workspace = sys.argv[1]
-retries = 2
 
 # Get list of file path folders with changes
 list_files = " ".join(sys.argv[5:])
@@ -92,29 +91,21 @@ for files in list_files.split(","):
 items_deploy = sm_items_deploy + re_items_deploy
 
 
-
 # Deploy Report or semantic model change by checking files modification at Report or SemanticModel folder.
 for pbi_item in list(set(items_deploy)):
     try:
+        status="Running"
         if ".Report" in pbi_item: # Another alternative check specific folder .split(".")[-1] == "Report"
             print("Running report deployment to path: " + pbi_item)
-            while retries > 0:
-                try:
-                    it.simple_deploy_report(workspace_id[0], workspace_id[0], pbi_item)                    
-                    break  # Exit the loop if successful
-
-                except Exception as e:
-                    print(f"Error occurred: {e}")
-                    print("Retrying in 30 seconds...")
-                    retries = retries - 1
-                    time.sleep(30)
+            res = it.simple_deploy_report(workspace_id[0], workspace_id[0], pbi_item)                    
         else:
-            print("Running semantic model deployment to path: " + pbi_item)
+            print("Running semantic model deployment to path: " + pbi_item)                        
             res = it.simple_deploy_semantic_model(workspace_id[0], pbi_item)
-            print(res.text)
+        
+        while status == "Running":            
             ope = lg.get_operation_state(res.headers['x-ms-operation-id'])
-            print(json.loads(ope)["status"])
-
+            status = json.loads(ope)["status"]
+        print("Status: " + status)            
 
     except Exception as e:
         print("Error_: ", e)
