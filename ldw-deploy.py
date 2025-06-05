@@ -20,7 +20,6 @@ This script is used to deploy Power BI reports or semantic models to a workspace
 '''
 
 import sys 
-import time
 import json
 from simplepbi import token
 from simplepbi.fabric import core
@@ -102,10 +101,13 @@ for pbi_item in list(items_deploy):
         else:
             print("Running semantic model deployment to path: " + pbi_item)                        
             res = it.simple_deploy_semantic_model(workspace_id[0], pbi_item)
-        
-        while status == "Running":            
-            ope = lg.get_operation_state(res.headers['x-ms-operation-id'])
-            status = json.loads(ope)["status"]
+        print("Running Operation ID check for: " + res.headers['x-ms-operation-id'])
+        while status == "Running":
+            try:
+                ope = lg.get_operation_state(res.headers['x-ms-operation-id'])
+                status = json.loads(ope)["status"]
+            except Exception as e:
+                print("Error_: ", e, " retrying...")
         print("Status: " + status)            
 
     except Exception as e:
