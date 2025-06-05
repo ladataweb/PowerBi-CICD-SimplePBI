@@ -105,9 +105,7 @@ for pbi_item in list(items_deploy):
         while status == "Running":
             try:
                 ope = lg.get_operation_state(res.headers['x-ms-operation-id'])
-                status = json.loads(ope)["status"]                
-                sys.stdout.write("\rProgress: {}%".format(json.loads(ope)["percentComplete"]))
-                sys.stdout.flush()
+                status = json.loads(ope)["status"]
             except Exception as e:
                 pass
         print("Status: " + status)            
