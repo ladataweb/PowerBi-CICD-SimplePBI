@@ -93,7 +93,7 @@ print("Order of items to deploy: " + str(items_deploy) )
 
 
 # Deploy Report or semantic model change by checking files modification at Report or SemanticModel folder.
-for pbi_item in list(set(items_deploy)):
+for pbi_item in list(items_deploy):
     try:
         status="Running"
         if ".Report" in pbi_item: # Another alternative check specific folder .split(".")[-1] == "Report"
