@@ -29,10 +29,11 @@ Workspace = sys.argv[1]
 
 # Get list of file path folders with changes
 list_files = " ".join(sys.argv[5:])
+print("The arguments are: " , str(sys.argv))
+print("The modified files are: " , list_files)
 
 # Get Workspace Name from folder considering the second item of the path as the workspace [1]. /Folders/Workspace/**
 Workspace_Name = list_files.split(",")[0].split("/")[:-1][1]
-print("The arguments are: " , str(sys.argv))
 
 # Show extraction
 print("Folder_Name: " + Workspace_Name, "\nWorkspace: " + Workspace, "\nFolders: " + str(list_files))
