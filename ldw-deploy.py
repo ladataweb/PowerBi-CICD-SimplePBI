@@ -100,8 +100,7 @@ for pbi_item in list(set(items_deploy)):
             print("Running report deployment to path: " + pbi_item)
             while retries > 0:
                 try:
-                    it.simple_deploy_report(workspace_id[0], workspace_id[0], pbi_item)
-                    raise Exception("Something went wrong with report deployment.")
+                    it.simple_deploy_report(workspace_id[0], workspace_id[0], pbi_item)                    
                     break  # Exit the loop if successful
 
                 except Exception as e:
