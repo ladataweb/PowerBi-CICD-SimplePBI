@@ -89,6 +89,7 @@ for files in list_files.split(","):
         print("Error_: ", e)
         raise Exception(e)
 items_deploy = sm_items_deploy + re_items_deploy
+print("Order of items to deploy: " + str(items_deploy) )
 
 
 # Deploy Report or semantic model change by checking files modification at Report or SemanticModel folder.
