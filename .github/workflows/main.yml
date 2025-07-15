@@ -2,6 +2,8 @@ name: Process Reports and Models
 
 on:
   push:
+    branches:
+      - main
     paths:
       - 'Workspaces/**'  # Trigger only when there's a change in this folder
 
