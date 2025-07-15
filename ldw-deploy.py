@@ -1,4 +1,4 @@
-'''.
+r'''.
            @@@@@@@@@@
        @@@@..........@@@@
     @@@         .        @@@
@@ -8,12 +8,12 @@
 @      . | |   _____  .        @
 @      . | |  |  __ \ .        @    La Data Web Script
 @      . | |__| |  | |.   ***  @
-@........|____| |  | |...*   *.@    Copyright © 2025 Ignacio Barrau
-@   .       . | |__| |. *     *@
-@   .       . |_____/ . *     *@    *********************************************
-@   .       .         . *     *@
-@   .       .         . *******@
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@........|____| |  | |...*   *.@    Copyright © 2025 La Data Web - All rights reserved.
+@   .       . | |__| |. *     *@    This software is proprietary and confidential
+@   .       . |_____/ . *     *@    Unauthorized copying of this file, via any medium, is strictly prohibited
+@   .       .         . *     *@    Written by Ignacio Barrau <igna_barrau@hotmail.com>
+@   .       .         . *******@    
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@    *********************************************
 
 This script is used to deploy Power BI reports or semantic models to a workspace. It is called from the GitHub Action. It uses the simplepbi library to deploy.
  
