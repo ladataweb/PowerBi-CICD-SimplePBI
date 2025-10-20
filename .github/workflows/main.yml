@@ -34,34 +34,37 @@ jobs:
       - name: Get changed folders
         id: detect_changes
         run: |
-            target_folder="Workspaces/"
-            valid_suffixes="\.Report$|\.SemanticModel$|\.Dataset$"
+    target_folder="Workspaces/"
+    valid_suffixes="\.Report$|\.SemanticModel$|\.Dataset$"
 
-            changed_files=$(git diff --name-only HEAD^..HEAD -- "$target_folder")
+    # Get changed files under Workspaces/
+    changed_files=$(git diff --name-only HEAD^..HEAD -- "$target_folder")
 
-            matched_folders=""
+    matched_folders=""
 
-            while IFS= read -r file; do
-              # Skip deleted files
-              if [[ ! -f "$file" ]]; then
-                continue
-              fi
+    while IFS= read -r file; do
+      # Skip if the file no longer exists (deleted)
+      if [[ ! -f "$file" ]]; then
+        continue
+      fi
 
-              # Get the directory of the changed file (this is what you want to keep)
-              folder_path=$(dirname "$file")
+      # Get the folder where the file was modified
+      folder_path=$(dirname "$file")
 
-              # Check if any part of the path contains a folder ending in a valid suffix
-              if echo "$folder_path" | grep -qE "/[^/]*(\.Report|\.SemanticModel|\.Dataset)(/|$)"; then
-                matched_folders+="$folder_path"$'\n'
-              fi
-            done <<< "$changed_files"
+      # Check if any folder in the path ends with one of the valid suffixes
+      for segment in $(echo "$folder_path" | tr '/' '\n'); do
+        if [[ "$segment" =~ $valid_suffixes ]]; then
+          matched_folders+="$folder_path"$'\n'
+          break
+        fi
+      done
+    done <<< "$changed_files"
 
-            # Deduplicate and convert to comma-separated list
-            changed_folders=$(echo "$matched_folders" | sort -u | tr '\n' ',' | sed 's/,$//')
+    # Deduplicate and convert to comma-separated list
+    changed_folders=$(echo "$matched_folders" | sort -u | tr '\n' ',' | sed 's/,$//')
 
-            echo "changed_folders=$changed_folders" >> $GITHUB_ENV
-            echo "Changed folders: $changed_folders"
-
+    echo "changed_folders=$changed_folders" >> $GITHUB_ENV
+    echo "Changed folders: $changed_folders"
       # Step 5: Run the Python script with the list of changed folders and secret key
       - name: Run Python script
         run: python ldw-deploy.py "ldw-key" ${{ secrets.TENANT_ID }} ${{ secrets.APP_ID }} ${{ secrets.SECRET_KEY }} ${{ env.changed_folders }} 
