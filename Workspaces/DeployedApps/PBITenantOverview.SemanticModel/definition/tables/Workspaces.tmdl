@@ -1,0 +1,162 @@
+table Workspaces
+	lineageTag: 80e6b560-6930-494d-9406-704d27416a08
+
+	measure Capacity =
+			
+			IF(
+			    SELECTEDVALUE(Workspaces[isOnDedicatedCapacity]) = TRUE(), "Dedicated Capacity", "Shared Capacity"
+			)
+		lineageTag: ef7cf0c6-684d-4d10-ba63-60ebabd56970
+
+	measure isValid =
+			
+			IF(
+			    COUNTROWS(Workspaces) > 0
+			    , ""
+			    , "Your key subscription has expired. Please purchase the product again to renew it"
+			)
+		lineageTag: 8b1258ef-cc14-4e11-ac40-09e6889d9ae2
+
+	column id
+		dataType: string
+		lineageTag: c4d8d086-ace0-4148-a1b7-f15c0ddf5e76
+		summarizeBy: none
+		sourceColumn: id
+
+		annotation SummarizationSetBy = Automatic
+
+	column isReadOnly
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 09289f77-02e7-4bcc-b17d-c1657086a24a
+		summarizeBy: none
+		sourceColumn: isReadOnly
+
+		annotation SummarizationSetBy = Automatic
+
+	column isOnDedicatedCapacity
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: d928fd1b-cae6-458c-bd91-0eb721f1ab3f
+		summarizeBy: none
+		sourceColumn: isOnDedicatedCapacity
+
+		annotation SummarizationSetBy = Automatic
+
+	column capacityMigrationStatus
+		dataType: string
+		lineageTag: 6d3b8beb-2f3a-4708-a08b-933844aba367
+		summarizeBy: none
+		sourceColumn: capacityMigrationStatus
+
+		annotation SummarizationSetBy = Automatic
+
+	column description
+		dataType: string
+		lineageTag: 1594264f-82c1-467a-b97e-9a5fb9dd8589
+		summarizeBy: none
+		sourceColumn: description
+
+		annotation SummarizationSetBy = Automatic
+
+	column type
+		dataType: string
+		lineageTag: 78e49364-c3ea-479d-8b7e-9557169da200
+		summarizeBy: none
+		sourceColumn: type
+
+		annotation SummarizationSetBy = Automatic
+
+	column state
+		dataType: string
+		lineageTag: 8dfdb4f0-855e-41e9-a710-3b0d2fa8400b
+		summarizeBy: none
+		sourceColumn: state
+
+		annotation SummarizationSetBy = Automatic
+
+	column dataflowStorageId
+		dataType: string
+		lineageTag: 1354db71-eba4-4a8a-9fb5-f794a14a2d4b
+		summarizeBy: none
+		sourceColumn: dataflowStorageId
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'hasWorkspaceLevelSettings '
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: e6b9552d-56e9-4deb-8f56-0939f9f9e202
+		summarizeBy: none
+		sourceColumn: "hasWorkspaceLevelSettings "
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		lineageTag: 0b03b300-3c0f-4095-9a73-2ba0b408e0b2
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column capacityId
+		dataType: string
+		lineageTag: 432ef18e-96a0-4c7c-a693-d97d6e3f086a
+		summarizeBy: none
+		sourceColumn: capacityId
+
+		annotation SummarizationSetBy = Automatic
+
+	column URL
+		dataType: string
+		lineageTag: 63dcb40a-964d-4b9c-90b0-b0e183028195
+		dataCategory: WebUrl
+		summarizeBy: none
+		sourceColumn: URL
+
+		annotation SummarizationSetBy = Automatic
+
+	column URL-Linage
+		dataType: string
+		lineageTag: 16950fd5-fb16-4b03-a773-de2ff38437f3
+		dataCategory: WebUrl
+		summarizeBy: none
+		sourceColumn: URL-Linage
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Workspaces-c5393f3c-fc6b-40f3-83b2-9911f39bc0bd = m
+		mode: import
+		queryGroup: PBIContent
+		source = ```
+				let
+				    Workspaces = if is_valid() = "Forbidden" then #table({"id","isReadOnly","isOnDedicatedCapacity","capacityMigrationStatus","description","type","state","dataflowStorageId","hasWorkspaceLevelSettings","name","capacityId","URL","URL-Linage"}, {})
+				    else
+				    let
+				        Query1 = Json.Document(Web.Contents("https://api.powerbi.com", 
+				        [
+				            RelativePath="v1.0/myorg/admin/groups",
+				            Query = [
+				                #"$top"= "4999"
+				            ],
+				            Headers=[
+				                Authorization=Text.Combine({"Bearer ", AccessToken()}, "")
+				            ]
+				        ])),
+				        value = Query1[value],
+				        #"Converted to Table" = Table.FromList(value, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+				        #"Expanded Column1" = Table.ExpandRecordColumn(#"Converted to Table", "Column1", {"id", "isReadOnly", "isOnDedicatedCapacity", "capacityMigrationStatus", "description", "type", "state", "dataflowStorageId", "hasWorkspaceLevelSettings ", "name", "capacityId"}, {"id", "isReadOnly", "isOnDedicatedCapacity", "capacityMigrationStatus", "description", "type", "state", "dataflowStorageId", "hasWorkspaceLevelSettings ", "name", "capacityId"}),
+				        #"Added Custom" = Table.AddColumn(#"Expanded Column1", "URL", each "https://app.powerbi.com/groups/"&[id]),
+				        #"Added Custom1" = Table.AddColumn(#"Added Custom", "URL-Linage", each "https://app.powerbi.com/groups/"&[id]&"/lineage"),
+				        #"Changed Type" = Table.TransformColumnTypes(#"Added Custom1",{{"id", type text}, {"isReadOnly", type logical}, {"isOnDedicatedCapacity", type logical}, {"capacityMigrationStatus", type text}, {"description", type text}, {"type", type text}, {"state", type text}, {"dataflowStorageId", type text}, {"hasWorkspaceLevelSettings ", type logical}, {"name", type text}, {"capacityId", type text}, {"URL", type text}, {"URL-Linage", type text}})
+				    in
+				        #"Changed Type"
+				in
+				    Workspaces
+				```
+
+	annotation PBI_ResultType = Exception
+
+	annotation PBI_NavigationStepName = Navigation
+
