@@ -68,7 +68,7 @@ table estadistica-inscripciones-iniciales-autos-motos
 		annotation SummarizationSetBy = Automatic
 
 	column UltimoMes =
-			IF(AND(
+			IF(AND( 
 				YEAR('estadistica-inscripciones-iniciales-autos-motos'[Fecha]) = YEAR(LASTDATE(ALL('estadistica-inscripciones-iniciales-autos-motos'[Fecha]))),
 				MONTH('estadistica-inscripciones-iniciales-autos-motos'[Fecha]) = MONTH(LASTDATE(ALL('estadistica-inscripciones-iniciales-autos-motos'[Fecha])) )),
 				"Si",
