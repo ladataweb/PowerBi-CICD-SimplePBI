@@ -34,41 +34,30 @@ jobs:
       - name: Get changed folders
         id: detect_changes
         run: |
-          # Define the folder to check for changes
-          target_folder="Workspaces/"
-          
-          # Ensure we're comparing against the previous commit (use HEAD and HEAD^)
-          # changed_folders=$(git diff --name-only HEAD^..HEAD -- "$target_folder" | grep -E "/.*\.(Report|SemanticModel)/" | cut -d/ -f1-2 | sort | uniq)
-          changed_folders=$(git diff --name-only HEAD^..HEAD -- "$target_folder" | \
-            sed 's|/[^/]*$||' | sort | uniq)
-          
-          
-          
-          # Filter only existing folders (exclude deleted ones)
-          existing_matching_folders=""
+            target_folder="Workspaces/"
+            keyword_pattern=".Report|.SemanticModel|.Dataset"
 
-          for folder in $changed_folders; do
-            if [[ -d "$folder" ]]; then
-              # Check if folder name ends with .Report, .SemanticModel, or .Dataset
-              folder_name=$(basename "$folder")
-              if [[ "$folder_name" == *.Report || "$folder_name" == *.SemanticModel || "$folder_name" == *.Dataset ]]; then
-                existing_matching_folders+="$folder,"
+            # Get list of changed files under Workspaces/
+            changed_files=$(git diff --name-only HEAD^..HEAD -- "$target_folder")
+
+            matched_folders=""
+
+            while IFS= read -r file; do
+              # Check if path contains one of the target keywords
+              if echo "$file" | grep -qE "$keyword_pattern"; then
+                # Make sure the file still exists (i.e., not deleted)
+                if [[ -f "$file" ]]; then
+                  folder=$(dirname "$file")
+                  matched_folders+="$folder"$'\n'
+                fi
               fi
-            fi
-          done
+            done <<< "$changed_files"
 
-          # Remove trailing comma
-          existing_matching_folders="${existing_matching_folders%,}"
+            # Deduplicate and convert to comma-separated string
+            changed_folders=$(echo "$matched_folders" | sort -u | tr '\n' ',' | sed 's/,$//')
 
-          # Save changed folders to output for later use
-          # echo "changed_folders=$changed_folders" >> $GITHUB_ENV
-          # echo "changed_folders=$changed_folders" | sed 's/ /\\n/g' >> $GITHUB_ENV
-          
-          #changed_folders=$(echo "$changed_folders" | tr '\n' ',')
-          # Remove trailing comma if it exists
-          #changed_folders="${changed_folders%,}"
-          echo "changed_folders=$existing_matching_folders" >> $GITHUB_ENV
-          echo "Changed folders: $existing_matching_folders"
+            echo "changed_folders=$changed_folders" >> $GITHUB_ENV
+            echo "Changed folders: $changed_folders"
 
       # Step 5: Run the Python script with the list of changed folders and secret key
       - name: Run Python script
