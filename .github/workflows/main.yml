@@ -45,15 +45,20 @@ jobs:
           
           
           # Filter only existing folders (exclude deleted ones)
-          existing_folders=""
+          existing_matching_folders=""
+
           for folder in $changed_folders; do
-            if [ -d "$folder" ]; then
-              existing_folders+="$folder,"
+            if [[ -d "$folder" ]]; then
+              # Check if folder name ends with .Report, .SemanticModel, or .Dataset
+              folder_name=$(basename "$folder")
+              if [[ "$folder_name" == *.Report || "$folder_name" == *.SemanticModel || "$folder_name" == *.Dataset ]]; then
+                existing_matching_folders+="$folder,"
+              fi
             fi
           done
 
           # Remove trailing comma
-          existing_folders="${existing_folders%,}"
+          existing_matching_folders="${existing_matching_folders%,}"
 
           # Save changed folders to output for later use
           # echo "changed_folders=$changed_folders" >> $GITHUB_ENV
@@ -62,8 +67,8 @@ jobs:
           #changed_folders=$(echo "$changed_folders" | tr '\n' ',')
           # Remove trailing comma if it exists
           #changed_folders="${changed_folders%,}"
-          echo "changed_folders=$existing_folders" >> $GITHUB_ENV
-          echo "Changed folders: $existing_folders"
+          echo "changed_folders=$existing_matching_folders" >> $GITHUB_ENV
+          echo "Changed folders: $existing_matching_folders"
 
       # Step 5: Run the Python script with the list of changed folders and secret key
       - name: Run Python script
