@@ -34,7 +34,11 @@ print("The arguments are: " , str(sys.argv))
 print("The modified files are: " , list_files)
 
 # Get Workspace Name from folder considering the second item of the path as the workspace [1]. /Folders/Workspace/**
-Workspace_Name = list_files.split(",")[0].split("/")[:-1][1]
+try:
+    Workspace_Name = list_files.split(",")[0].split("/")[:-1][1]
+except IndexError as e:
+    print("Caught IndexError list out of index, proceding alternative method.")
+    Workspace_Name = list_files.split(",")[0].split("/")[1]
 
 # Show extraction
 print("Folder_Name/Workspace: " + Workspace_Name, "\nFolders: " + str(list_files))
