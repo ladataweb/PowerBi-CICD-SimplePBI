@@ -1,0 +1,103 @@
+table APIKey
+	isHidden
+	lineageTag: 73737bf7-1cde-48dc-aaf9-d6a62cf73c77
+
+	refreshPolicy
+		policyType: basic
+		rollingWindowGranularity: month
+		rollingWindowPeriods: 1
+		incrementalGranularity: month
+		incrementalPeriods: 1
+		sourceExpression =
+			let
+			    Source = List.Dates(StartDate,Duration.Days(EndDate - StartDate)+1, #duration(1,0,0,0) ),
+			    #"Converted to Table" = Table.FromList(Source, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+			    #"Renamed Columns" = Table.RenameColumns(#"Converted to Table",{{"Column1", "Fecha"}}),
+			    #"Added Custom" = Table.AddColumn(#"Renamed Columns", "Period", each Text.From(Date.Year([Fecha])) & "-" & Text.PadStart(Text.From(Date.Month([Fecha])),2,"0" ), type text),
+			    #"Changed Type" = Table.TransformColumnTypes(#"Added Custom",{{"Fecha", type datetime}}),
+			    #"Removed Duplicates" = Table.Distinct(#"Changed Type", {"Period"}),
+			    #"Filtered Rows" = Table.SelectRows(#"Removed Duplicates", each [Fecha] >= RangeStart and [Fecha] < RangeEnd),
+			    #"Invoked Custom Function" = Table.AddColumn(#"Filtered Rows", "MonthlyData", each try get_key([Period]) otherwise [Period=[Period], State="TryCaptures", Key=SimplePBIX_Key, Message="Error on server"]),
+			    #"Expanded MonthlyData" = Table.ExpandRecordColumn(#"Invoked Custom Function", "MonthlyData", {"State", "Key", "Message"}, {"State", "Key", "Message"})
+			in
+			    #"Expanded MonthlyData"
+
+	column Fecha
+		dataType: dateTime
+		isHidden
+		formatString: General Date
+		lineageTag: 19e63d8f-72ad-46b2-8316-ed04a169f8b5
+		summarizeBy: none
+		sourceColumn: Fecha
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Period
+		dataType: string
+		isHidden
+		lineageTag: 1b5ae32d-8e80-414e-8a09-71e0a044553e
+		summarizeBy: none
+		sourceColumn: Period
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column State
+		dataType: string
+		isHidden
+		lineageTag: d93bae6d-4bc8-4268-ae29-f6bbf3070387
+		summarizeBy: none
+		sourceColumn: State
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Key
+		dataType: string
+		isHidden
+		lineageTag: 93ab8585-1bd7-4384-b910-16b1616d70fb
+		summarizeBy: none
+		sourceColumn: Key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Message
+		dataType: string
+		isHidden
+		lineageTag: ff3ece13-739f-43e3-9ffa-3ff0ab9a5a26
+		summarizeBy: none
+		sourceColumn: Message
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition APIKey-2f93169d-ab32-4711-b38b-accfa5822986 = m
+		mode: import
+		queryGroup: ApiKeyCheck
+		source =
+				let
+				    Source = List.Dates(StartDate,Duration.Days(EndDate - StartDate)+1, #duration(1,0,0,0) ),
+				    #"Converted to Table" = Table.FromList(Source, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+				    #"Renamed Columns" = Table.RenameColumns(#"Converted to Table",{{"Column1", "Fecha"}}),
+				    #"Added Custom" = Table.AddColumn(#"Renamed Columns", "Period", each Text.From(Date.Year([Fecha])) & "-" & Text.PadStart(Text.From(Date.Month([Fecha])),2,"0" ), type text),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Added Custom",{{"Fecha", type datetime}}),
+				    #"Removed Duplicates" = Table.Distinct(#"Changed Type", {"Period"}),
+				    #"Filtered Rows" = Table.SelectRows(#"Removed Duplicates", each [Fecha] >= RangeStart and [Fecha] < RangeEnd),
+				    #"Invoked Custom Function" = Table.AddColumn(#"Filtered Rows", "MonthlyData", each try get_key([Period]) otherwise [Period=[Period], State="TryCaptures", Key=SimplePBIX_Key, Message="Error on server"]),
+				    #"Expanded MonthlyData" = Table.ExpandRecordColumn(#"Invoked Custom Function", "MonthlyData", {"State", "Key", "Message"}, {"State", "Key", "Message"})
+				in
+				    #"Expanded MonthlyData"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+
