@@ -1,0 +1,89 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "name": "30f2dc5b0872e9c386d4",
+  "position": {
+    "x": 192,
+    "y": 224,
+    "z": 2000,
+    "height": 272,
+    "width": 928.00000000000011,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Workspaces"
+                    }
+                  },
+                  "Property": "name"
+                }
+              },
+              "queryRef": "Workspaces.name"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Workspaces"
+                    }
+                  },
+                  "Property": "state"
+                }
+              },
+              "queryRef": "Workspaces.state"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Workspaces"
+                    }
+                  },
+                  "Property": "type"
+                }
+              },
+              "queryRef": "Workspaces.type"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Users_Workspaces"
+                    }
+                  },
+                  "Property": "identifier"
+                }
+              },
+              "queryRef": "Users_Workspaces.identifier"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Workspaces"
+                    }
+                  },
+                  "Property": "isOnDedicatedCapacity"
+                }
+              },
+              "queryRef": "Workspaces.isOnDedicatedCapacity"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
