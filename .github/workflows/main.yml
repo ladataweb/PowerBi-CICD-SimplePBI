@@ -35,36 +35,24 @@ jobs:
         id: detect_changes
         run: |
     target_folder="Workspaces/"
-    valid_suffixes="\.Report$|\.SemanticModel$|\.Dataset$"
 
-    # Get changed files under Workspaces/
-    changed_files=$(git diff --name-only HEAD^..HEAD -- "$target_folder")
+    # Get list of parent directories of changed files under target_folder
+    changed_folders=$(git diff --name-only HEAD^..HEAD -- "$target_folder" | \
+      sed 's|/[^/]*$||' | sort | uniq)
 
-    matched_folders=""
-
-    while IFS= read -r file; do
-      # Skip if the file no longer exists (deleted)
-      if [[ ! -f "$file" ]]; then
-        continue
+    # Filter only existing folders (exclude deleted ones)
+    existing_folders=""
+    for folder in $changed_folders; do
+      if [ -d "$folder" ]; then
+        existing_folders+="$folder,"
       fi
+    done
 
-      # Get the folder where the file was modified
-      folder_path=$(dirname "$file")
+    # Remove trailing comma
+    existing_folders="${existing_folders%,}"
 
-      # Check if any folder in the path ends with one of the valid suffixes
-      for segment in $(echo "$folder_path" | tr '/' '\n'); do
-        if [[ "$segment" =~ $valid_suffixes ]]; then
-          matched_folders+="$folder_path"$'\n'
-          break
-        fi
-      done
-    done <<< "$changed_files"
-
-    # Deduplicate and convert to comma-separated list
-    changed_folders=$(echo "$matched_folders" | sort -u | tr '\n' ',' | sed 's/,$//')
-
-    echo "changed_folders=$changed_folders" >> $GITHUB_ENV
-    echo "Changed folders: $changed_folders"
+    echo "changed_folders=$existing_folders" >> $GITHUB_ENV
+    echo "Changed folders: $existing_folders"
       # Step 5: Run the Python script with the list of changed folders and secret key
       - name: Run Python script
         run: python ldw-deploy.py "ldw-key" ${{ secrets.TENANT_ID }} ${{ secrets.APP_ID }} ${{ secrets.SECRET_KEY }} ${{ env.changed_folders }} 

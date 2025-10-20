@@ -36,19 +36,12 @@ print("The modified files are: " , list_files)
 if ".Report" not in list_files and ".SemanticModel" not in list_files and ".Dataset" not in list_files:
     sys.exit()
 
-# Get Workspace Name from folder considering the second item of the path as the workspace [1]. /Folders/Workspace/**
-if list_files.split(",")[0] == "":
-    try:
-        Workspace_Name = list_files.split(",")[1:][0].split("/")[:-1][1]
-    except IndexError as e:
-        print("Caught IndexError list out of index, proceding alternative method.")
-        Workspace_Name = list_files.split(",")[1:][0].split("/")[1]    
-else:
-    try:
-        Workspace_Name = list_files.split(",")[0].split("/")[:-1][1]
-    except IndexError as e:
-        print("Caught IndexError list out of index, proceding alternative method.")
-        Workspace_Name = list_files.split(",")[0].split("/")[1]
+
+try:
+    Workspace_Name = list_files.split(",")[0].split("/")[:-1][1]
+except IndexError as e:
+    print("Caught IndexError list out of index, proceding alternative method.")
+    Workspace_Name = list_files.split(",")[0].split("/")[1]
 
 # Show extraction
 print("Folder_Name/Workspace: " + Workspace_Name, "\nFolders: " + str(list_files))
