@@ -37,27 +37,26 @@ jobs:
             target_folder="Workspaces/"
             valid_suffixes="\.Report$|\.SemanticModel$|\.Dataset$"
 
-            # Get all changed files under Workspaces/
             changed_files=$(git diff --name-only HEAD^..HEAD -- "$target_folder")
 
             matched_folders=""
 
             while IFS= read -r file; do
-              # Start from the full path and walk up to find a matching folder
-              path="$file"
-              while [[ "$path" != "$target_folder" && "$path" == */* ]]; do
-                path=$(dirname "$path")
-                folder_name=$(basename "$path")
-                if [[ "$folder_name" =~ $valid_suffixes ]]; then
-                  if [[ -d "$path" ]]; then
-                    matched_folders+="$path"$'\n'
-                  fi
-                  break
-                fi
-              done
+              # Skip deleted files
+              if [[ ! -f "$file" ]]; then
+                continue
+              fi
+
+              # Get the directory of the changed file (this is what you want to keep)
+              folder_path=$(dirname "$file")
+
+              # Check if any part of the path contains a folder ending in a valid suffix
+              if echo "$folder_path" | grep -qE "/[^/]*(\.Report|\.SemanticModel|\.Dataset)(/|$)"; then
+                matched_folders+="$folder_path"$'\n'
+              fi
             done <<< "$changed_files"
 
-            # Deduplicate and convert to comma-separated string
+            # Deduplicate and convert to comma-separated list
             changed_folders=$(echo "$matched_folders" | sort -u | tr '\n' ',' | sed 's/,$//')
 
             echo "changed_folders=$changed_folders" >> $GITHUB_ENV
