@@ -94,7 +94,7 @@ for files in list_files.split(","):
     except Exception as e:
         print("Error_: ", e)
         raise Exception(e)
-items_deploy = set(sm_items_deploy) + set(re_items_deploy)
+items_deploy = list(set(sm_items_deploy)) + list(set(re_items_deploy))
 print("Order of items to deploy: " + str(items_deploy) )
 
 
