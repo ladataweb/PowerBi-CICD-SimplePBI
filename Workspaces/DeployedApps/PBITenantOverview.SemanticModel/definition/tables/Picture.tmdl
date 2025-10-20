@@ -1,0 +1,22 @@
+table Picture
+	lineageTag: 1f692cd1-c99d-4d1a-8c15-0ca838662048
+
+	column LogoPicture
+		dataType: string
+		lineageTag: 44247504-3513-41f0-ae26-7565bee7d32d
+		dataCategory: ImageUrl
+		summarizeBy: none
+		sourceColumn: LogoPicture
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Picture-537b1da4-c708-438b-9ea6-a496d8cf0219 = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRecords({[LogoPicture = Logo ]})
+				in
+				    Source
+
+	annotation PBI_ResultType = Table
+
