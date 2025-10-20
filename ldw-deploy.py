@@ -37,7 +37,7 @@ print("The modified files are: " , list_files)
 Workspace_Name = list_files.split(",")[0].split("/")[:-1][1]
 
 # Show extraction
-print("Folder_Name: " + Workspace_Name, "\nWorkspace: " + Workspace, "\nFolders: " + str(list_files))
+print("Folder_Name/Workspace: " + Workspace_Name, "\nFolders: " + str(list_files))
 
 # Get list of files to import
 #list_files = [item for item in Files.split(",") if item[-4:]=="pbix" and item.split("/")[0] ==Folder_Name]
