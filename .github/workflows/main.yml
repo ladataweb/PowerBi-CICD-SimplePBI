@@ -35,22 +35,26 @@ jobs:
         id: detect_changes
         run: |
             target_folder="Workspaces/"
-            keyword_pattern=".Report|.SemanticModel|.Dataset"
+            valid_suffixes="\.Report$|\.SemanticModel$|\.Dataset$"
 
-            # Get list of changed files under Workspaces/
+            # Get all changed files under Workspaces/
             changed_files=$(git diff --name-only HEAD^..HEAD -- "$target_folder")
 
             matched_folders=""
 
             while IFS= read -r file; do
-              # Check if path contains one of the target keywords
-              if echo "$file" | grep -qE "$keyword_pattern"; then
-                # Make sure the file still exists (i.e., not deleted)
-                if [[ -f "$file" ]]; then
-                  folder=$(dirname "$file")
-                  matched_folders+="$folder"$'\n'
+              # Start from the full path and walk up to find a matching folder
+              path="$file"
+              while [[ "$path" != "$target_folder" && "$path" == */* ]]; do
+                path=$(dirname "$path")
+                folder_name=$(basename "$path")
+                if [[ "$folder_name" =~ $valid_suffixes ]]; then
+                  if [[ -d "$path" ]]; then
+                    matched_folders+="$path"$'\n'
+                  fi
+                  break
                 fi
-              fi
+              done
             done <<< "$changed_files"
 
             # Deduplicate and convert to comma-separated string
