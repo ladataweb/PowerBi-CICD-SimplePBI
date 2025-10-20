@@ -1,0 +1,96 @@
+table Users_Workspaces
+	lineageTag: a011bbee-bea6-40cb-b76a-531deefd385a
+
+	measure 'user filter workspace' = INT ( NOT ISEMPTY(Users_Workspaces) )
+		formatString: 0
+		lineageTag: c4b3d2b4-ac37-4f01-9bfd-02f06a0ae841
+
+	measure 'Users Names' =
+			
+			CONCATENATEX(Users_Workspaces, "- "&Users_Workspaces[identifier], UNICHAR(10) )
+		lineageTag: 5143e194-795f-4f01-b964-182f92712929
+
+	column id
+		dataType: string
+		lineageTag: 361824b4-9084-4e3f-b421-91fcdbeddc29
+		summarizeBy: none
+		sourceColumn: id
+
+		annotation SummarizationSetBy = Automatic
+
+	column emailAddress
+		dataType: string
+		lineageTag: b1811911-0343-4aef-a9bc-ac5866505b12
+		summarizeBy: none
+		sourceColumn: emailAddress
+
+		annotation SummarizationSetBy = Automatic
+
+	column groupUserAccessRight
+		dataType: string
+		lineageTag: 478a6944-da32-472c-809f-e41177cccc25
+		summarizeBy: none
+		sourceColumn: groupUserAccessRight
+
+		annotation SummarizationSetBy = Automatic
+
+	column displayName
+		dataType: string
+		lineageTag: 18025298-24fb-4231-9731-1f6eee257a4d
+		summarizeBy: none
+		sourceColumn: displayName
+
+		annotation SummarizationSetBy = Automatic
+
+	column identifier
+		dataType: string
+		lineageTag: 721559e6-ddb2-405d-94ec-875843a87dad
+		summarizeBy: none
+		sourceColumn: identifier
+
+		annotation SummarizationSetBy = Automatic
+
+	column principalType
+		dataType: string
+		lineageTag: 5f5b1605-8db1-4631-9cf9-028ab6d11c97
+		summarizeBy: none
+		sourceColumn: principalType
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Users_Workspaces-8d7ae8ca-c9ea-4e9c-a705-757a75941d06 = m
+		mode: import
+		queryGroup: PBIContent
+		source = ```
+				let
+				    Users_Workspaces = if is_valid() = "Forbidden" then #table({"id","emailAddress","groupUserAccessRight","displayName","identifier","principalType"}, {})
+				else
+				    let
+				        Query1 = Json.Document(Web.Contents("https://api.powerbi.com", 
+				        [
+				            RelativePath="v1.0/myorg/admin/groups",
+				            Query = [
+				                #"$top"= "999",
+				                #"$expand"="users"
+				            ],
+				            Headers=[
+				                Authorization=Text.Combine({"Bearer ", AccessToken()}, "")
+				            ]
+				        ])),
+				        value = Query1[value],
+				        #"Converted to Table" = Table.FromList(value, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+				        #"Expanded Column1" = Table.ExpandRecordColumn(#"Converted to Table", "Column1", {"id","users"}, {"id", "users"}),
+				        #"Expanded users" = Table.ExpandListColumn(#"Expanded Column1", "users"),
+				        #"Expanded users1" = Table.ExpandRecordColumn(#"Expanded users", "users", {"emailAddress", "groupUserAccessRight", "displayName", "identifier", "principalType"}, {"emailAddress", "groupUserAccessRight", "displayName", "identifier", "principalType"}),
+				        #"Changed Type" = Table.TransformColumnTypes(#"Expanded users1",{{"id", type text}, {"emailAddress", type text}, {"groupUserAccessRight", type text}, {"displayName", type text}, {"identifier", type text}, {"principalType", type text}}),
+				        #"Filtered Rows" = Table.SelectRows(#"Changed Type", each ([identifier] <> null))
+				    in
+				        #"Filtered Rows"
+				in
+				    Users_Workspaces
+				```
+
+	annotation PBI_ResultType = Exception
+
+	annotation PBI_NavigationStepName = Navigation
+
