@@ -34,25 +34,24 @@ jobs:
       - name: Get changed folders
         id: detect_changes
         run: |
-            target_folder="Workspaces/"
-            # Get changed files under target_folder, excluding .pbip files
-            changed_folders=$(git diff --name-only HEAD^..HEAD -- "$target_folder" | \
-              grep -vE '\.pbip$' | \
-              sed 's|/[^/]*$||' | sort | uniq)
+          # Define the folder to check for changes
+          target_folder="Workspaces/"
+          
+          # Ensure we're comparing against the previous commit (use HEAD and HEAD^)
+          # changed_folders=$(git diff --name-only HEAD^..HEAD -- "$target_folder" | grep -E "/.*\.(Report|SemanticModel)/" | cut -d/ -f1-2 | sort | uniq)
+          changed_folders=$(git diff --name-only HEAD^..HEAD -- "$target_folder" | \
+            sed 's|/[^/]*$||' | sort | uniq)
 
-            # Filter only existing folders (exclude deleted ones)
-            existing_folders=""
-            for folder in $changed_folders; do
-              if [ -d "$folder" ]; then
-                existing_folders+="$folder,"
-              fi
-            done
+          # Save changed folders to output for later use
+          # echo "changed_folders=$changed_folders" >> $GITHUB_ENV
+          # echo "changed_folders=$changed_folders" | sed 's/ /\\n/g' >> $GITHUB_ENV
+          
+          changed_folders=$(echo "$changed_folders" | tr '\n' ',')
+          # Remove trailing comma if it exists
+          changed_folders="${changed_folders%,}"
+          echo "changed_folders=$changed_folders" >> $GITHUB_ENV
+          echo "Changed folders: $changed_folders"
 
-            # Remove trailing comma
-            existing_folders="${existing_folders%,}"
-
-            echo "changed_folders=$existing_folders" >> $GITHUB_ENV
-            echo "Changed folders: $existing_folders"
       # Step 5: Run the Python script with the list of changed folders and secret key
       - name: Run Python script
         run: python ldw-deploy.py "ldw-key" ${{ secrets.TENANT_ID }} ${{ secrets.APP_ID }} ${{ secrets.SECRET_KEY }} ${{ env.changed_folders }} 
