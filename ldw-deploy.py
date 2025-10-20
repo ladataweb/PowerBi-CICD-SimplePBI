@@ -33,6 +33,9 @@ list_files = " ".join(sys.argv[5:])
 print("The arguments are: " , str(sys.argv))
 print("The modified files are: " , list_files)
 
+if ".Report" not in list_files and ".SemanticModel" not in list_files and ".Dataset" not in list_files:
+    sys.exit()
+
 # Get Workspace Name from folder considering the second item of the path as the workspace [1]. /Folders/Workspace/**
 try:
     Workspace_Name = list_files.split(",")[0].split("/")[:-1][1]
