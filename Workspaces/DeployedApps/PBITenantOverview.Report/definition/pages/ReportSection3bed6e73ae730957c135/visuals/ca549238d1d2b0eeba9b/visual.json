@@ -1,0 +1,192 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "name": "ca549238d1d2b0eeba9b",
+  "position": {
+    "x": 136,
+    "y": 384.14370521065678,
+    "z": 12000,
+    "height": 250,
+    "width": 1016,
+    "tabOrder": 11000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Datasets"
+                    }
+                  },
+                  "Property": "name"
+                }
+              },
+              "queryRef": "Datasets.name",
+              "displayName": "Dataset"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Workspaces"
+                    }
+                  },
+                  "Property": "name"
+                }
+              },
+              "queryRef": "Workspaces.name",
+              "displayName": "Workspace"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Datasets"
+                    }
+                  },
+                  "Property": "configuredBy"
+                }
+              },
+              "queryRef": "Datasets.configuredBy"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Datasets"
+                    }
+                  },
+                  "Property": "contentProviderType"
+                }
+              },
+              "queryRef": "Datasets.contentProviderType"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Datasets"
+                    }
+                  },
+                  "Property": "createdDate"
+                }
+              },
+              "queryRef": "Datasets.createdDate"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Datasets"
+                    }
+                  },
+                  "Property": "isEffectiveIdentityRolesRequired"
+                }
+              },
+              "queryRef": "Datasets.isEffectiveIdentityRolesRequired",
+              "displayName": "RLS"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Datasets"
+                    }
+                  },
+                  "Property": "URL"
+                }
+              },
+              "queryRef": "Datasets.URL"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "grid": [
+        {
+          "properties": {
+            "rowPadding": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "223.1367544644594D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Workspaces.name"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "111.43422946737735D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Datasets.createdDate"
+          }
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "wordWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Table_Dataset'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "isHidden": true
+}
