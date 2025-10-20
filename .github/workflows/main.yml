@@ -41,7 +41,9 @@ jobs:
           # changed_folders=$(git diff --name-only HEAD^..HEAD -- "$target_folder" | grep -E "/.*\.(Report|SemanticModel)/" | cut -d/ -f1-2 | sort | uniq)
           changed_folders=$(git diff --name-only HEAD^..HEAD -- "$target_folder" | \
             sed 's|/[^/]*$||' | sort | uniq)
-            
+          
+          
+          
           # Filter only existing folders (exclude deleted ones)
           existing_folders=""
           for folder in $changed_folders; do
@@ -60,8 +62,8 @@ jobs:
           #changed_folders=$(echo "$changed_folders" | tr '\n' ',')
           # Remove trailing comma if it exists
           #changed_folders="${changed_folders%,}"
-          echo "changed_folders=$changed_folders" >> $GITHUB_ENV
-          echo "Changed folders: $changed_folders"
+          echo "changed_folders=$existing_folders" >> $GITHUB_ENV
+          echo "Changed folders: $existing_folders"
 
       # Step 5: Run the Python script with the list of changed folders and secret key
       - name: Run Python script
