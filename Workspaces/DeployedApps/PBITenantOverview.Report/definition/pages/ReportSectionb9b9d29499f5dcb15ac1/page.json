@@ -1,8 +1,0 @@
-{
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
-  "name": "ReportSectionb9b9d29499f5dcb15ac1",
-  "displayName": "Tenant",
-  "displayOption": "FitToPage",
-  "height": 720,
-  "width": 1280
-}
