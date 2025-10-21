@@ -1,0 +1,142 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 0,
+            "y": 242
+          },
+          "nodeIndex": "Apps",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 1208.8,
+            "y": 310
+          },
+          "nodeIndex": "Dataflows",
+          "size": {
+            "height": 252.13701996927807,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 939.09999999999991,
+            "y": 0
+          },
+          "nodeIndex": "Datasets",
+          "size": {
+            "height": 259.62949308755765,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 374.90000000000009,
+            "y": 0
+          },
+          "nodeIndex": "Reports",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 932.69999999999982,
+            "y": 590
+          },
+          "nodeIndex": "Users_Workspaces",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 667,
+            "y": 224
+          },
+          "nodeIndex": "Workspaces",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 343.59999999999991,
+            "y": 522
+          },
+          "nodeIndex": "Dashboards",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 568.85714285714278
+          },
+          "nodeIndex": "Capacities",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1983,
+            "y": 0
+          },
+          "nodeIndex": "Picture",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2358.4,
+            "y": 0
+          },
+          "nodeIndex": "APIKey",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 81.742842792566549,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}
