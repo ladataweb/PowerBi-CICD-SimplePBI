@@ -36,26 +36,23 @@ jobs:
         run: |
           # Define the folder to check for changes
           target_folder="Workspaces/"
-          
-          # Ensure we're comparing against the previous commit (use HEAD and HEAD^)
-          # changed_folders=$(git diff --name-only HEAD^..HEAD -- "$target_folder" | grep -E "/.*\.(Report|SemanticModel)/" | cut -d/ -f1-2 | sort | uniq)
+
+          # Get changed folders
           changed_folders=$(git diff --name-only HEAD^..HEAD -- "$target_folder" | \
             grep -vE '\.pbip$' | \
             sed 's|/[^/]*$||' | sort | uniq)
 
-          # Save changed folders to output for later use
-          # echo "changed_folders=$changed_folders" >> $GITHUB_ENV
-          # echo "changed_folders=$changed_folders" | sed 's/ /\\n/g' >> $GITHUB_ENV
-          # Filter only existing folders (exclude deleted ones)
+          # Filter only existing folders
           existing_folders=""
-          for folder in $changed_folders; do
+          while IFS= read -r folder; do
             if [ -d "$folder" ]; then
-              existing_folders+="$folder,"
+              existing_folders+="$folder"$'\n'
             fi
-          done
-          #changed_folders=$(echo "$changed_folders" | tr '\n' ',')
-          # Remove trailing comma if it exists
-          existing_folders="${existing_folders%,}"
+          done <<< "$changed_folders"
+
+          # Remove trailing newline and convert to comma-separated list
+          existing_folders=$(echo "$existing_folders" | sed '/^\s*$/d' | paste -sd "," -)
+
           echo "changed_folders=$existing_folders" >> $GITHUB_ENV
           echo "Changed folders: $existing_folders"
 
