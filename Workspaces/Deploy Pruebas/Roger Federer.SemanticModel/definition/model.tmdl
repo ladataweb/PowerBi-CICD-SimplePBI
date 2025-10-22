@@ -3,7 +3,7 @@ model Model
 	defaultPowerBIDataSourceVersion: powerBI_V3
 	sourceQueryCulture: es-AR
 	dataAccessOptions
-		legacyRedirects
+		legacyRedirects 
 		returnErrorValuesAsNull 
 
 annotation __PBI_TimeIntelligenceEnabled = 1
