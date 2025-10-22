@@ -1,0 +1,91 @@
+table atp_rank_sincolumnas
+	lineageTag: 7fdea43e-120a-4a81-b801-512c74ffb8d2
+
+	column Column1
+		dataType: string
+		lineageTag: bbcfa516-fd03-4f19-818a-298ca646c89f
+		summarizeBy: none
+		sourceColumn: Column1
+
+		annotation SummarizationSetBy = Automatic
+
+	column Link
+		dataType: string
+		lineageTag: dd251c57-356b-4321-acfc-639eafce5a39
+		summarizeBy: none
+		sourceColumn: Link
+
+		annotation SummarizationSetBy = Automatic
+
+	column ranking_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 35f1d6ec-1d9a-471b-89a2-f63c926dd261
+		summarizeBy: none
+		sourceColumn: ranking_date
+
+		variation Variación
+			isDefault
+			relationship: f3177993-4f3d-424f-a924-af54063b358e
+			defaultHierarchy: LocalDateTable_6d967402-b92c-4825-85e8-5117b639699f.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column rank
+		dataType: int64
+		formatString: 0
+		lineageTag: 7b2af1e9-1eab-47c4-94d3-4c72fb3fc0b8
+		summarizeBy: sum
+		sourceColumn: rank
+
+		annotation SummarizationSetBy = Automatic
+
+	column player
+		dataType: int64
+		formatString: 0
+		lineageTag: 3839389f-b0de-4d3f-b7ed-7e59ef658f5e
+		summarizeBy: none
+		sourceColumn: player
+
+		annotation SummarizationSetBy = Automatic
+
+	column points
+		dataType: int64
+		formatString: 0
+		lineageTag: 498ca0d5-af5f-48fa-b984-5dffde887bc2
+		summarizeBy: sum
+		sourceColumn: points
+
+		annotation SummarizationSetBy = Automatic
+
+	column year
+		dataType: int64
+		formatString: 0
+		lineageTag: f95003fd-7dfd-469c-b179-30e09d50ef1e
+		summarizeBy: sum
+		sourceColumn: year
+
+		annotation SummarizationSetBy = Automatic
+
+	partition atp_rank_sincolumnas-07820dec-5e9f-49f0-b06f-8f2b97194aac = m
+		mode: import
+		source =
+				let
+				    Rank_List = {"10s", "current"},
+				    #"Convertida en tabla" = Table.FromList(Rank_List, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+				    #"Personalizada agregada" = Table.AddColumn(#"Convertida en tabla", "Link", each Text.Combine({"JeffSackmann/tennis_atp/master/atp_rankings_",Text.From([Column1]),".csv"}, "")),
+				    #"Personalizada agregada1" = Table.AddColumn(#"Personalizada agregada", "Data", each get_atp_matches_sinCol("https://raw.githubusercontent.com", [Link])),
+				    #"Se expandió Data" = Table.ExpandTableColumn(#"Personalizada agregada1", "Data", {"Column1", "Column2", "Column3", "Column4"}, {"Data.Column1", "Data.Column2", "Data.Column3", "Data.Column4"}),
+				    #"Columnas con nombre cambiado" = Table.RenameColumns(#"Se expandió Data",{{"Data.Column1", "ranking_date"}, {"Data.Column2", "rank"}, {"Data.Column3", "player"}, {"Data.Column4", "points"}}),
+				    #"Tipo cambiado" = Table.TransformColumnTypes(#"Columnas con nombre cambiado",{{"rank", Int64.Type}, {"player", Int64.Type}, {"points", Int64.Type}, {"ranking_date", type date}, {"Column1", type text}, {"Link", type text}}),
+				    #"Año insertado" = Table.AddColumn(#"Tipo cambiado", "year", each Date.Year([ranking_date]), Int64.Type),
+				    #"Removed Errors" = Table.RemoveRowsWithErrors(#"Año insertado", {"ranking_date"})
+				in
+				    #"Removed Errors"
+
+	annotation PBI_QueryRelationships = {"columnCount":7,"keyColumnNames":[],"queryRelationships":[],"columnIdentities":["Section1/atp_rank_sincolumnas/Tipo cambiado.{Column1,0}","Section1/atp_rank_sincolumnas/Tipo cambiado.{Link,1}","Section1/atp_rank_sincolumnas/Tipo cambiado.{ranking_date,2}","Section1/atp_rank_sincolumnas/Tipo cambiado.{rank,3}","Section1/atp_rank_sincolumnas/Tipo cambiado.{player,4}","Section1/atp_rank_sincolumnas/Tipo cambiado.{points,5}","Section1/atp_rank_sincolumnas/Año insertado.{year,6}"],"ColumnCount":7,"KeyColumnNames":[],"ColumnIdentities":["Section1/atp_rank_sincolumnas/Tipo cambiado.{Column1,0}","Section1/atp_rank_sincolumnas/Tipo cambiado.{Link,1}","Section1/atp_rank_sincolumnas/Tipo cambiado.{ranking_date,2}","Section1/atp_rank_sincolumnas/Tipo cambiado.{rank,3}","Section1/atp_rank_sincolumnas/Tipo cambiado.{player,4}","Section1/atp_rank_sincolumnas/Tipo cambiado.{points,5}","Section1/atp_rank_sincolumnas/Año insertado.{year,6}"],"RelationshipInfo":[]}
+
+	annotation PBI_ResultType = Exception
+

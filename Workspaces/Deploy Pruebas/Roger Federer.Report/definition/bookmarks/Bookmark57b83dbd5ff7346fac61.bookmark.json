@@ -1,0 +1,682 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/1.4.0/schema.json",
+  "displayName": "Ranking",
+  "name": "Bookmark57b83dbd5ff7346fac61",
+  "options": {
+    "targetVisualNames": [
+      "bae5f9468ae079404070",
+      "3a439b915de682156875",
+      "f4a98e2e648ec7567956",
+      "57a729a3afd72004140d",
+      "d3105510ba043fa8c5a5",
+      "3097e2449d57dd05226c",
+      "58751b3f8116b46f63ac",
+      "6c616cc40a9081211abe",
+      "ecc326c983f47a782334",
+      "581f0d118d5a11205bdc"
+    ],
+    "suppressData": true
+  },
+  "explorationState": {
+    "version": "1.3",
+    "activeSection": "ReportSection732001f0cfab4df2ddc9",
+    "filters": {
+      "byExpr": [
+        {
+          "name": "Filter",
+          "type": "Categorical",
+          "expression": {
+            "Column": {
+              "Expression": {
+                "SourceRef": {
+                  "Entity": "year"
+                }
+              },
+              "Property": "Año"
+            }
+          },
+          "howCreated": 1
+        }
+      ]
+    },
+    "sections": {
+      "ReportSection732001f0cfab4df2ddc9": {
+        "visualContainers": {
+          "f68f2c9da51e77e80b69": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "3a439b915de682156875": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "e9bcabdf45e8d2e08ab6",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "atp_matches"
+                        }
+                      },
+                      "Property": "W/L"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "ff4758482fc0e15f3797",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "atp_matches"
+                        }
+                      },
+                      "Property": "Cantidad"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "pieChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "atp_matches"
+                        }
+                      },
+                      "Property": "Cantidad"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "atp_matches"
+                        }
+                      },
+                      "Property": "W/L"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "f4a98e2e648ec7567956": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "bb65e6cce693ea9e7031",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "atp_players"
+                        }
+                      },
+                      "Property": "Pais"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "ddb3205d25354b7ea02e",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "atp_players"
+                        }
+                      },
+                      "Property": "Mano"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "0c6db5a026d22462e9c3",
+                  "type": "Advanced",
+                  "expression": {
+                    "Aggregation": {
+                      "Expression": {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "atp_matches"
+                            }
+                          },
+                          "Property": "1_ht"
+                        }
+                      },
+                      "Function": 1
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "multiRowCard",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 1,
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "atp_players"
+                        }
+                      },
+                      "Property": "Pais"
+                    }
+                  }
+                }
+              ]
+            },
+            "highlight": {
+              "selection": [
+                {
+                  "dataMap": {
+                    "atp_players.Pais": [
+                      {
+                        "scopeId": {
+                          "And": {
+                            "Left": {
+                              "Comparison": {
+                                "ComparisonKind": 0,
+                                "Left": {
+                                  "Column": {
+                                    "Expression": {
+                                      "SourceRef": {
+                                        "Entity": "atp_players"
+                                      }
+                                    },
+                                    "Property": "Pais"
+                                  }
+                                },
+                                "Right": {
+                                  "Literal": {
+                                    "Value": "'SUI'"
+                                  }
+                                }
+                              }
+                            },
+                            "Right": {
+                              "Comparison": {
+                                "ComparisonKind": 0,
+                                "Left": {
+                                  "Column": {
+                                    "Expression": {
+                                      "SourceRef": {
+                                        "Entity": "atp_players"
+                                      }
+                                    },
+                                    "Property": "Mano"
+                                  }
+                                },
+                                "Right": {
+                                  "Literal": {
+                                    "Value": "'R'"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "metadata": [
+                    "Sum(atp_matches.1_ht)"
+                  ]
+                }
+              ],
+              "filterExpressionMetadata": {
+                "expressions": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "atp_players"
+                        }
+                      },
+                      "Property": "Pais"
+                    }
+                  },
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "atp_players"
+                        }
+                      },
+                      "Property": "Mano"
+                    }
+                  }
+                ],
+                "cachedValueItems": [
+                  {
+                    "identities": [
+                      {
+                        "scopeId": {
+                          "And": {
+                            "Left": {
+                              "Comparison": {
+                                "ComparisonKind": 0,
+                                "Left": {
+                                  "Column": {
+                                    "Expression": {
+                                      "SourceRef": {
+                                        "Entity": "atp_players"
+                                      }
+                                    },
+                                    "Property": "Pais"
+                                  }
+                                },
+                                "Right": {
+                                  "Literal": {
+                                    "Value": "'SUI'"
+                                  }
+                                }
+                              }
+                            },
+                            "Right": {
+                              "Comparison": {
+                                "ComparisonKind": 0,
+                                "Left": {
+                                  "Column": {
+                                    "Expression": {
+                                      "SourceRef": {
+                                        "Entity": "atp_players"
+                                      }
+                                    },
+                                    "Property": "Mano"
+                                  }
+                                },
+                                "Right": {
+                                  "Literal": {
+                                    "Value": "'R'"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ],
+                    "valueMap": {
+                      "0": "SUI",
+                      "1": "R"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "3692dc7f7670f81587cf": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "a78b402681a8e61dc245": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "57a729a3afd72004140d": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "4e60174b60643aca0189",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "atp_matches"
+                        }
+                      },
+                      "Property": "Ganador"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "card",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "atp_matches"
+                        }
+                      },
+                      "Property": "Ganador"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "d3105510ba043fa8c5a5": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "43dc3c769012f6b6e636",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "atp_matches"
+                        }
+                      },
+                      "Property": "Finalista"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "card",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "atp_matches"
+                        }
+                      },
+                      "Property": "Finalista"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "3097e2449d57dd05226c": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "2754428c3508899c0e4c",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "atp_matches"
+                        }
+                      },
+                      "Property": "Acierto Finales"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "card",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "atp_matches"
+                        }
+                      },
+                      "Property": "Acierto Finales"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "58751b3f8116b46f63ac": {
+            "singleVisual": {
+              "visualType": "image",
+              "objects": {}
+            }
+          },
+          "64f2b0c9f35116b89144": {
+            "singleVisual": {
+              "visualType": "image",
+              "objects": {}
+            }
+          },
+          "835d78f150dfc2ab3206": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "9e750731579090277631",
+                  "type": "Advanced",
+                  "expression": {
+                    "Aggregation": {
+                      "Expression": {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "atp_rank"
+                            }
+                          },
+                          "Property": "points"
+                        }
+                      },
+                      "Function": 0
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "c5e43b5f2f0b38b9d835",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "atp_rank"
+                        }
+                      },
+                      "Property": "ranking_date"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "9f66517c6e429fe103a0",
+                  "type": "Advanced",
+                  "expression": {
+                    "Aggregation": {
+                      "Expression": {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "atp_rank"
+                            }
+                          },
+                          "Property": "rank"
+                        }
+                      },
+                      "Function": 0
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "clusteredColumnChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 1,
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "atp_rank"
+                        }
+                      },
+                      "Property": "ranking_date"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "atp_rank"
+                        }
+                      },
+                      "Property": "ranking_date"
+                    }
+                  }
+                ]
+              },
+              "display": {
+                "mode": "hidden"
+              }
+            }
+          },
+          "6c616cc40a9081211abe": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "3e74c5e696e7ffa4fe39": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "20b4f1dc28aa97c1bc06",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "atp_rank"
+                        }
+                      },
+                      "Property": "ranking_date"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "4e23bad1a49cc41608d2",
+                  "type": "Advanced",
+                  "expression": {
+                    "Aggregation": {
+                      "Expression": {
+                        "Column": {
+                          "Expression": {
+                            "SourceRef": {
+                              "Entity": "atp_rank"
+                            }
+                          },
+                          "Property": "rank"
+                        }
+                      },
+                      "Function": 1
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "columnChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 1,
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "atp_rank"
+                        }
+                      },
+                      "Property": "ranking_date"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "atp_rank"
+                        }
+                      },
+                      "Property": "ranking_date"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "ecc326c983f47a782334": {
+            "singleVisual": {
+              "visualType": "image",
+              "objects": {}
+            }
+          }
+        }
+      }
+    },
+    "objects": {
+      "merge": {
+        "outspacePane": [
+          {
+            "properties": {
+              "expanded": {
+                "expr": {
+                  "Literal": {
+                    "Value": "false"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

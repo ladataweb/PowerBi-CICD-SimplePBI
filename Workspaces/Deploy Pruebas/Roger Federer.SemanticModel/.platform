@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Roger Federer"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "0ffb24df-d243-4c52-bf51-dd56254d9b6f"
+  }
+}

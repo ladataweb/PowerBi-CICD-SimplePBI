@@ -1,0 +1,98 @@
+table atp_rank
+	lineageTag: 84ce583a-6431-49a4-beb0-1551e0454b25
+
+	measure 'Meses nro 1' =
+			
+			CALCULATE(
+			    COUNT(atp_rank[ranking_date])
+			    , atp_rank[rank] = 1
+			)
+		formatString: 0
+		lineageTag: dac52d53-df02-4f1e-abfc-f2472d77e51f
+
+	measure Trans = "RGBA(0,0,0,0)"
+		lineageTag: ece22dc9-bbd3-403b-bbb3-a17319e5ec4a
+
+	column Column1
+		dataType: string
+		lineageTag: a1081e1b-23b1-4b33-8ab8-e71aca733b0e
+		summarizeBy: none
+		sourceColumn: Column1
+
+		annotation SummarizationSetBy = Automatic
+
+	column Link
+		dataType: string
+		lineageTag: b4c1cc72-4579-4836-a339-21182022160c
+		summarizeBy: none
+		sourceColumn: Link
+
+		annotation SummarizationSetBy = Automatic
+
+	column ranking_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: b4afca86-25cc-46ed-9d2e-bb12369cef93
+		summarizeBy: none
+		sourceColumn: ranking_date
+
+		variation Variación
+			isDefault
+			relationship: a01fe21f-2563-4dd8-8fe7-859c1fb24673
+			defaultHierarchy: LocalDateTable_312d84f9-867e-4f82-8afd-d42dabf58826.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column rank
+		dataType: int64
+		formatString: 0
+		lineageTag: 97c03084-c6ad-424f-998d-f74b308dba3c
+		summarizeBy: sum
+		sourceColumn: rank
+
+		annotation SummarizationSetBy = Automatic
+
+	column player
+		dataType: int64
+		formatString: 0
+		lineageTag: 4b0dff61-7910-4427-a602-3b3ced1ff31e
+		summarizeBy: none
+		sourceColumn: player
+
+		annotation SummarizationSetBy = Automatic
+
+	column points
+		dataType: int64
+		formatString: 0
+		lineageTag: e544566a-2e04-41b8-90c9-deedcfbcfe45
+		summarizeBy: sum
+		sourceColumn: points
+
+		annotation SummarizationSetBy = Automatic
+
+	column year
+		dataType: int64
+		formatString: 0
+		lineageTag: 57aff1d6-8738-47dc-9ad6-af3fdb09b1d3
+		summarizeBy: none
+		sourceColumn: year
+
+		annotation SummarizationSetBy = Automatic
+
+	partition atp_rank-aaa9de0d-e686-4828-bee2-0636ca384959 = m
+		mode: import
+		source =
+				let
+				    Origen = Table.Combine({atp_rank_concolumnas, atp_rank_sincolumnas}),
+				    #"Filtered Rows" = Table.SelectRows(Origen, each ([player] = 103819))
+				in
+				    #"Filtered Rows"
+
+	annotation PBI_QueryRelationships = {"columnCount":7,"keyColumnNames":[],"queryRelationships":[],"columnIdentities":["Section1/atp_rank/Origen.{Column1,0}","Section1/atp_rank/Origen.{Link,1}","Section1/atp_rank/Origen.{ranking_date,2}","Section1/atp_rank/Origen.{rank,3}","Section1/atp_rank/Origen.{player,4}","Section1/atp_rank/Origen.{points,5}","Section1/atp_rank/Origen.{year,6}"],"ColumnCount":7,"KeyColumnNames":[],"ColumnIdentities":["Section1/atp_rank/Origen.{Column1,0}","Section1/atp_rank/Origen.{Link,1}","Section1/atp_rank/Origen.{ranking_date,2}","Section1/atp_rank/Origen.{rank,3}","Section1/atp_rank/Origen.{player,4}","Section1/atp_rank/Origen.{points,5}","Section1/atp_rank/Origen.{year,6}"],"RelationshipInfo":[]}
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

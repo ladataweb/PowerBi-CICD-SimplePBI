@@ -1,0 +1,186 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/3.0.0/schema.json",
+  "themeCollection": {
+    "baseTheme": {
+      "name": "CY19SU06",
+      "reportVersionAtImport": {
+        "visual": "1.8.41",
+        "report": "2.0.41",
+        "page": "1.3.41"
+      },
+      "type": "SharedResources"
+    },
+    "customTheme": {
+      "name": "NachosTheme5740250093746773.json",
+      "reportVersionAtImport": {
+        "visual": "1.8.51",
+        "report": "2.0.51",
+        "page": "1.3.51"
+      },
+      "type": "RegisteredResources"
+    }
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "Filter",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "year"
+              }
+            },
+            "Property": "Año"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "User"
+      }
+    ]
+  },
+  "objects": {
+    "section": [
+      {
+        "properties": {
+          "verticalAlignment": {
+            "expr": {
+              "Literal": {
+                "Value": "'Top'"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "outspacePane": [
+      {
+        "properties": {
+          "expanded": {
+            "expr": {
+              "Literal": {
+                "Value": "false"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "publicCustomVisuals": [
+    "textFilter25A4896A83E0487089E2B90C9AE57C8A"
+  ],
+  "resourcePackages": [
+    {
+      "name": "SharedResources",
+      "type": "SharedResources",
+      "items": [
+        {
+          "name": "CY19SU06",
+          "path": "BaseThemes/CY19SU06.json",
+          "type": "BaseTheme"
+        }
+      ]
+    },
+    {
+      "name": "textFilter25A4896A83E0487089E2B90C9AE57C8A",
+      "type": "CustomVisual",
+      "items": [
+        {
+          "name": "textFilter25A4896A83E0487089E2B90C9AE57C8A.pbiviz.json",
+          "path": "textFilter25A4896A83E0487089E2B90C9AE57C8A.pbiviz.json",
+          "type": "CustomVisualMetadata"
+        }
+      ]
+    },
+    {
+      "name": "RegisteredResources",
+      "type": "RegisteredResources",
+      "items": [
+        {
+          "name": "NachosTheme5740250093746773.json",
+          "path": "NachosTheme5740250093746773.json",
+          "type": "CustomTheme"
+        },
+        {
+          "name": "Tenis-bg216756133832144626.png",
+          "path": "Tenis-bg216756133832144626.png",
+          "type": "Image"
+        },
+        {
+          "name": "Tenis-bg5726738288929836.png",
+          "path": "Tenis-bg5726738288929836.png",
+          "type": "Image"
+        },
+        {
+          "name": "34456693050296496468001.png",
+          "path": "34456693050296496468001.png",
+          "type": "Image"
+        },
+        {
+          "name": "istockphoto-1345493117-170667a2058105350265409.jpg",
+          "path": "istockphoto-1345493117-170667a2058105350265409.jpg",
+          "type": "Image"
+        },
+        {
+          "name": "947b42b4b68ed4bfe1c3ab2ef878bf13579459080798673.png",
+          "path": "947b42b4b68ed4bfe1c3ab2ef878bf13579459080798673.png",
+          "type": "Image"
+        },
+        {
+          "name": "Tennis-icon03354458259544013.png",
+          "path": "Tennis-icon03354458259544013.png",
+          "type": "Image"
+        },
+        {
+          "name": "Roger-Federer-PNG-Photos37588720693099287.png",
+          "path": "Roger-Federer-PNG-Photos37588720693099287.png",
+          "type": "Image"
+        },
+        {
+          "name": "Flag_of_Switzerland.svg9190089617171429.png",
+          "path": "Flag_of_Switzerland.svg9190089617171429.png",
+          "type": "Image"
+        },
+        {
+          "name": "NicePng_roger-federer-png_36051759822009162919.png",
+          "path": "NicePng_roger-federer-png_36051759822009162919.png",
+          "type": "Image"
+        },
+        {
+          "name": "pngwing.com6741015218888582.png",
+          "path": "pngwing.com6741015218888582.png",
+          "type": "Image"
+        },
+        {
+          "name": "pngegg_(1)8639194828621146.png",
+          "path": "pngegg_(1)8639194828621146.png",
+          "type": "Image"
+        },
+        {
+          "name": "pngegg19512090951923455.png",
+          "path": "pngegg19512090951923455.png",
+          "type": "Image"
+        }
+      ]
+    },
+    {
+      "name": "wishyoulizationbarchartrace",
+      "type": "CustomVisual",
+      "items": [
+        {
+          "name": "wishyoulizationbarchartrace.pbiviz.json",
+          "path": "wishyoulizationbarchartrace.pbiviz.json",
+          "type": "CustomVisualMetadata"
+        }
+      ]
+    }
+  ],
+  "settings": {
+    "useStylableVisualContainerHeader": true,
+    "exportDataMode": "AllowSummarized",
+    "defaultDrillFilterOtherVisuals": true,
+    "allowChangeFilterTypes": true,
+    "useEnhancedTooltips": true
+  }
+}

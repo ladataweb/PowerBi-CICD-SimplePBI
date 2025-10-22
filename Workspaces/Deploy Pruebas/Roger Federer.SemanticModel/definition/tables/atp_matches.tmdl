@@ -1,0 +1,499 @@
+table atp_matches
+	lineageTag: e0e7581c-d152-44b5-af2c-3a6e0b219d57
+
+	measure Ganador =
+			
+			CALCULATE(
+			    COUNT(atp_matches[Id de Torneo]),
+			    FILTER(
+			        ALL(atp_matches[Ronda], atp_matches[W/L]),
+			        AND(atp_matches[Ronda] = "F", atp_matches[W/L] = "W")
+			    )
+			)
+		formatString: 0
+		lineageTag: 55f22037-80e5-410c-a600-7803481d0865
+
+	measure Finalista =
+			
+			CALCULATE(
+			    COUNT(atp_matches[Id de Torneo]),
+			    atp_matches[Ronda] = "F"
+			)
+		formatString: 0
+		lineageTag: d9ffed4a-eff1-4405-9c8c-9ca0d9ae84a0
+
+	measure 'Acierto Finales' =
+			
+			DIVIDE (
+			    [Ganador] , [Finalista] , 0
+			)
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 91f8fa51-bb79-472d-af39-7438f5e93d20
+
+	measure 'Participacion Grand Slam' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(atp_matches[Id de Torneo]),
+			    atp_matches[Nivel Torneo] = "Grand Slams")
+		formatString: 0
+		lineageTag: b78f7d7a-071e-4f24-b345-7c34135d0f4f
+
+	measure Cantidad =
+			
+			COUNTROWS(atp_matches)
+		formatString: 0
+		lineageTag: 24a58e80-a408-4ceb-88c9-7d9b416a9790
+
+	column Año
+		dataType: int64
+		formatString: 0
+		lineageTag: 9140b6dc-9600-4cbd-bba0-758433a5ef3b
+		summarizeBy: none
+		sourceColumn: Año
+
+		annotation SummarizationSetBy = Automatic
+
+	column Link
+		dataType: string
+		lineageTag: 19560738-4c0d-4b0c-bc44-67c2cee87834
+		summarizeBy: none
+		sourceColumn: Link
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Id de Torneo'
+		dataType: string
+		lineageTag: 3d0cd246-f8ae-4f67-a4d9-5fa65d9ae72c
+		summarizeBy: none
+		sourceColumn: Id de Torneo
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nombre Torneo'
+		dataType: string
+		lineageTag: 12d8a0cc-4b81-4cbf-8a18-478c5bdeffcc
+		summarizeBy: none
+		sourceColumn: Nombre Torneo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Superficie
+		dataType: string
+		lineageTag: 1c1512fa-d668-493e-9d99-6ce93ea26613
+		summarizeBy: none
+		sourceColumn: Superficie
+
+		annotation SummarizationSetBy = Automatic
+
+	column draw_size
+		dataType: int64
+		formatString: 0
+		lineageTag: 9bbf52c7-c9e6-462d-afe3-b2c58d23af41
+		summarizeBy: sum
+		sourceColumn: draw_size
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nivel Torneo'
+		dataType: string
+		lineageTag: ad6516f8-37cc-4d65-81cb-09ff5ebbdb22
+		summarizeBy: none
+		sourceColumn: Nivel Torneo
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fecha de Torneo'
+		dataType: dateTime
+		formatString: d/m/yyyy
+		lineageTag: 027a64d1-565a-4a79-b48c-d123d2e30ef4
+		summarizeBy: none
+		sourceColumn: Fecha de Torneo
+
+		variation Variación
+			isDefault
+			relationship: fdd84dc4-e6bd-4959-ad58-eadd71e6e0e8
+			defaultHierarchy: LocalDateTable_ac07daf6-afb9-451c-8619-12d7eceb8803.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column match_num
+		dataType: int64
+		formatString: 0
+		lineageTag: 2e00281e-8f1b-4222-a7a0-d3083c343aa0
+		summarizeBy: sum
+		sourceColumn: match_num
+
+		annotation SummarizationSetBy = Automatic
+
+	column 1_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 5beb4e8f-0e1e-4b6b-b69f-1d3fc11c9ec3
+		summarizeBy: none
+		sourceColumn: 1_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 1_seed
+		dataType: string
+		lineageTag: c2221e84-73d6-40ca-8b55-320a080d42a8
+		summarizeBy: none
+		sourceColumn: 1_seed
+
+		annotation SummarizationSetBy = Automatic
+
+	column 1_entry
+		dataType: string
+		lineageTag: 82425789-74d2-49ae-a517-b96c4c647e92
+		summarizeBy: none
+		sourceColumn: 1_entry
+
+		annotation SummarizationSetBy = Automatic
+
+	column 1_Nombre
+		dataType: string
+		lineageTag: 730c5392-1618-4221-ac2a-2cbaec915295
+		summarizeBy: none
+		sourceColumn: 1_Nombre
+
+		annotation SummarizationSetBy = Automatic
+
+	column 1_hand
+		dataType: string
+		lineageTag: 47f16ec2-9440-44a0-bb90-b96ee0bb8da9
+		summarizeBy: none
+		sourceColumn: 1_hand
+
+		annotation SummarizationSetBy = Automatic
+
+	column 1_ht
+		dataType: int64
+		formatString: 0
+		lineageTag: 19f089c0-8885-4f30-aefa-4ff6c8448eb5
+		summarizeBy: sum
+		sourceColumn: 1_ht
+
+		annotation SummarizationSetBy = Automatic
+
+	column 1_Pais
+		dataType: string
+		lineageTag: 133ca547-64a0-43f8-bf50-01b2ef6dd181
+		summarizeBy: none
+		sourceColumn: 1_Pais
+
+		annotation SummarizationSetBy = Automatic
+
+	column 1_age
+		dataType: int64
+		formatString: 0
+		lineageTag: 542a66ae-dc15-49a7-b212-514e32e71e14
+		summarizeBy: sum
+		sourceColumn: 1_age
+
+		annotation SummarizationSetBy = Automatic
+
+	column 1_rank
+		dataType: string
+		lineageTag: a40c86b2-255b-45a7-83b1-f138f40ca6c5
+		summarizeBy: none
+		sourceColumn: 1_rank
+
+		annotation SummarizationSetBy = Automatic
+
+	column 1_rank_points
+		dataType: string
+		lineageTag: 1e66b795-3327-4cc5-b33e-1abe611a4829
+		summarizeBy: none
+		sourceColumn: 1_rank_points
+
+		annotation SummarizationSetBy = Automatic
+
+	column 2_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 75045588-2e99-4419-974e-0f11f745f245
+		summarizeBy: sum
+		sourceColumn: 2_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 2_seed
+		dataType: string
+		lineageTag: fe0671c2-1e7c-43d8-b012-e0fae8b585f4
+		summarizeBy: none
+		sourceColumn: 2_seed
+
+		annotation SummarizationSetBy = Automatic
+
+	column 2_entry
+		dataType: string
+		lineageTag: 947b6452-853b-48e5-975b-a9ca3e96cc69
+		summarizeBy: none
+		sourceColumn: 2_entry
+
+		annotation SummarizationSetBy = Automatic
+
+	column 2_Nombre
+		dataType: string
+		lineageTag: d2c61ade-28dc-4a79-9931-f22597fc57c0
+		summarizeBy: none
+		sourceColumn: 2_Nombre
+
+		annotation SummarizationSetBy = Automatic
+
+	column 2_hand
+		dataType: string
+		lineageTag: fc4d0c5d-4da5-49bf-918a-e4ebae5187b9
+		summarizeBy: none
+		sourceColumn: 2_hand
+
+		annotation SummarizationSetBy = Automatic
+
+	column 2_ht
+		dataType: int64
+		formatString: 0
+		lineageTag: 9149003b-955a-4ab1-b620-b47447951e1c
+		summarizeBy: sum
+		sourceColumn: 2_ht
+
+		annotation SummarizationSetBy = Automatic
+
+	column 2_Pais
+		dataType: string
+		lineageTag: bb35151c-e9f8-4ce7-ab9e-d38d87fbed87
+		summarizeBy: none
+		sourceColumn: 2_Pais
+
+		annotation SummarizationSetBy = Automatic
+
+	column 2_age
+		dataType: int64
+		formatString: 0
+		lineageTag: e9152463-cbd7-46cc-b496-67e2a6b2d340
+		summarizeBy: sum
+		sourceColumn: 2_age
+
+		annotation SummarizationSetBy = Automatic
+
+	column 2_rank
+		dataType: string
+		lineageTag: 47bbe6a5-3ed2-42da-95e0-d49f29401bba
+		summarizeBy: none
+		sourceColumn: 2_rank
+
+		annotation SummarizationSetBy = Automatic
+
+	column 2_rank_points
+		dataType: string
+		lineageTag: 5363e19e-8ca4-475e-9f2a-fe4a51322324
+		summarizeBy: none
+		sourceColumn: 2_rank_points
+
+		annotation SummarizationSetBy = Automatic
+
+	column score
+		dataType: string
+		lineageTag: 34b92460-a9d7-46b8-8bdb-85d5ab60f4b1
+		summarizeBy: none
+		sourceColumn: score
+
+		annotation SummarizationSetBy = Automatic
+
+	column best_of
+		dataType: int64
+		formatString: 0
+		lineageTag: 36c28347-e9a0-491d-b470-bec228cd6216
+		summarizeBy: sum
+		sourceColumn: best_of
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ronda
+		dataType: string
+		lineageTag: 89c85ca4-3f45-4caa-8d46-b71b3e8d2a31
+		summarizeBy: none
+		sourceColumn: Ronda
+
+		annotation SummarizationSetBy = Automatic
+
+	column minutes
+		dataType: string
+		lineageTag: fa8bafe5-3e70-4488-9d37-d12d227ded9c
+		summarizeBy: none
+		sourceColumn: minutes
+
+		annotation SummarizationSetBy = Automatic
+
+	column 1_ace
+		dataType: string
+		lineageTag: 61b27843-f298-42d4-8a69-44f8c00354d7
+		summarizeBy: none
+		sourceColumn: 1_ace
+
+		annotation SummarizationSetBy = Automatic
+
+	column 1_df
+		dataType: string
+		lineageTag: 903fed52-c76d-4248-910c-2c3eba2b7d8f
+		summarizeBy: none
+		sourceColumn: 1_df
+
+		annotation SummarizationSetBy = Automatic
+
+	column 1_svpt
+		dataType: string
+		lineageTag: 6c40ee61-3cfa-4ae3-99b4-d5e549e76e0a
+		summarizeBy: none
+		sourceColumn: 1_svpt
+
+		annotation SummarizationSetBy = Automatic
+
+	column 1_1stIn
+		dataType: string
+		lineageTag: 74a6501d-2963-40c4-b763-9315ce40b1f2
+		summarizeBy: none
+		sourceColumn: 1_1stIn
+
+		annotation SummarizationSetBy = Automatic
+
+	column 1_1stWon
+		dataType: string
+		lineageTag: 522d79e2-0520-41f3-a6b3-9ff1264a3d6f
+		summarizeBy: none
+		sourceColumn: 1_1stWon
+
+		annotation SummarizationSetBy = Automatic
+
+	column 1_2ndWon
+		dataType: string
+		lineageTag: 4a8d2b25-2ebe-47f9-a22d-9b4dc4b161cd
+		summarizeBy: none
+		sourceColumn: 1_2ndWon
+
+		annotation SummarizationSetBy = Automatic
+
+	column 1_SvGms
+		dataType: string
+		lineageTag: 6509fbf3-853e-4ed4-b760-54d9f858c76a
+		summarizeBy: none
+		sourceColumn: 1_SvGms
+
+		annotation SummarizationSetBy = Automatic
+
+	column 1_bpSaved
+		dataType: string
+		lineageTag: c67cbd83-533c-45cd-99de-61150a88afa8
+		summarizeBy: none
+		sourceColumn: 1_bpSaved
+
+		annotation SummarizationSetBy = Automatic
+
+	column 1_bpFaced
+		dataType: string
+		lineageTag: 69a41a22-ac3b-4222-a17d-cb077a58dc07
+		summarizeBy: none
+		sourceColumn: 1_bpFaced
+
+		annotation SummarizationSetBy = Automatic
+
+	column 2_ace
+		dataType: string
+		lineageTag: b50a3904-67a3-499a-8cb0-670a628b9393
+		summarizeBy: none
+		sourceColumn: 2_ace
+
+		annotation SummarizationSetBy = Automatic
+
+	column 2_df
+		dataType: string
+		lineageTag: 5084fee9-4e04-436f-93a2-8f3cd436a6bd
+		summarizeBy: none
+		sourceColumn: 2_df
+
+		annotation SummarizationSetBy = Automatic
+
+	column 2_svpt
+		dataType: string
+		lineageTag: 39a6e579-833c-4d03-93fd-ab1830f924a5
+		summarizeBy: none
+		sourceColumn: 2_svpt
+
+		annotation SummarizationSetBy = Automatic
+
+	column 2_1stIn
+		dataType: string
+		lineageTag: 66b82688-506e-4985-a539-d96c4cf813f3
+		summarizeBy: none
+		sourceColumn: 2_1stIn
+
+		annotation SummarizationSetBy = Automatic
+
+	column 2_1stWon
+		dataType: string
+		lineageTag: 53d6da77-1d65-407d-9cb1-0b5f676eedf9
+		summarizeBy: none
+		sourceColumn: 2_1stWon
+
+		annotation SummarizationSetBy = Automatic
+
+	column 2_2ndWon
+		dataType: string
+		lineageTag: 56146ebf-e9df-49a8-8909-d33ef4e824df
+		summarizeBy: none
+		sourceColumn: 2_2ndWon
+
+		annotation SummarizationSetBy = Automatic
+
+	column 2_SvGms
+		dataType: string
+		lineageTag: 6dc53559-aa07-4c96-aa72-62b281c5ac1c
+		summarizeBy: none
+		sourceColumn: 2_SvGms
+
+		annotation SummarizationSetBy = Automatic
+
+	column 2_bpSaved
+		dataType: string
+		lineageTag: 9a8300ff-0b70-48bc-9fb4-b9e86d58a425
+		summarizeBy: none
+		sourceColumn: 2_bpSaved
+
+		annotation SummarizationSetBy = Automatic
+
+	column 2_bpFaced
+		dataType: string
+		lineageTag: aff674bc-ccf4-4b1e-9585-7d80ed8a4814
+		summarizeBy: none
+		sourceColumn: 2_bpFaced
+
+		annotation SummarizationSetBy = Automatic
+
+	column W/L
+		dataType: string
+		lineageTag: 5254ae27-d3f2-4638-954a-7e43691085ff
+		summarizeBy: none
+		sourceColumn: W/L
+
+		annotation SummarizationSetBy = Automatic
+
+	partition atp_matches-35bd6158-731b-4d08-acd1-d6fc2cb17dc4 = m
+		mode: import
+		source =
+				let
+				    Origen = Table.Combine({atp_matches_W, atp_matches_L}),
+				    #"Tipo cambiado" = Table.TransformColumnTypes(Origen,{{"1_seed", type text},{"2_seed", type text}}),
+				    #"Columnas con nombre cambiado" = Table.RenameColumns(#"Tipo cambiado",{{"tourney_name", "Nombre Torneo"}, {"surface", "Superficie"}, {"tourney_level", "Nivel Torneo"}, {"tourney_date", "Fecha de Torneo"}, {"1_ioc", "1_Pais"}, {"1_name", "1_Nombre"}, {"2_ioc", "2_Pais"}, {"2_name", "2_Nombre"}, {"round", "Ronda"}, {"year", "Año"}, {"tourney_id", "Id de Torneo"}}),
+				    #"Valor reemplazado" = Table.ReplaceValue(#"Columnas con nombre cambiado","Chps.","Open",Replacer.ReplaceText,{"Nombre Torneo"})
+				in
+				    #"Valor reemplazado"
+
+	annotation PBI_QueryRelationships = {"columnCount":52,"keyColumnNames":[],"queryRelationships":[],"columnIdentities":["Section1/atp_matches/Origen.{year,0}","Section1/atp_matches/Origen.{Link,1}","Section1/atp_matches/Origen.{tourney_id,2}","Section1/atp_matches/Valor reemplazado.{Nombre Torneo,3}","Section1/atp_matches/Origen.{surface,4}","Section1/atp_matches/Origen.{draw_size,5}","Section1/atp_matches/Origen.{tourney_level,6}","Section1/atp_matches/Origen.{tourney_date,7}","Section1/atp_matches/Origen.{match_num,8}","Section1/atp_matches/Origen.{1_id,9}","Section1/atp_matches/Tipo cambiado.{1_seed,10}","Section1/atp_matches/Origen.{1_entry,11}","Section1/atp_matches/Origen.{1_name,12}","Section1/atp_matches/Origen.{1_hand,13}","Section1/atp_matches/Origen.{1_ht,14}","Section1/atp_matches/Origen.{1_ioc,15}","Section1/atp_matches/Origen.{1_age,16}","Section1/atp_matches/Origen.{1_rank,17}","Section1/atp_matches/Origen.{1_rank_points,18}","Section1/atp_matches/Origen.{2_id,19}","Section1/atp_matches/Tipo cambiado.{2_seed,20}","Section1/atp_matches/Origen.{2_entry,21}","Section1/atp_matches/Origen.{2_name,22}","Section1/atp_matches/Origen.{2_hand,23}","Section1/atp_matches/Origen.{2_ht,24}","Section1/atp_matches/Origen.{2_ioc,25}","Section1/atp_matches/Origen.{2_age,26}","Section1/atp_matches/Origen.{2_rank,27}","Section1/atp_matches/Origen.{2_rank_points,28}","Section1/atp_matches/Origen.{score,29}","Section1/atp_matches/Origen.{best_of,30}","Section1/atp_matches/Origen.{round,31}","Section1/atp_matches/Origen.{minutes,32}","Section1/atp_matches/Origen.{1_ace,33}","Section1/atp_matches/Origen.{1_df,34}","Section1/atp_matches/Origen.{1_svpt,35}","Section1/atp_matches/Origen.{1_1stIn,36}","Section1/atp_matches/Origen.{1_1stWon,37}","Section1/atp_matches/Origen.{1_2ndWon,38}","Section1/atp_matches/Origen.{1_SvGms,39}","Section1/atp_matches/Origen.{1_bpSaved,40}","Section1/atp_matches/Origen.{1_bpFaced,41}","Section1/atp_matches/Origen.{2_ace,42}","Section1/atp_matches/Origen.{2_df,43}","Section1/atp_matches/Origen.{2_svpt,44}","Section1/atp_matches/Origen.{2_1stIn,45}","Section1/atp_matches/Origen.{2_1stWon,46}","Section1/atp_matches/Origen.{2_2ndWon,47}","Section1/atp_matches/Origen.{2_SvGms,48}","Section1/atp_matches/Origen.{2_bpSaved,49}","Section1/atp_matches/Origen.{2_bpFaced,50}","Section1/atp_matches/Origen.{W/L,51}"],"ColumnCount":52,"KeyColumnNames":[],"ColumnIdentities":["Section1/atp_matches/Origen.{year,0}","Section1/atp_matches/Origen.{Link,1}","Section1/atp_matches/Origen.{tourney_id,2}","Section1/atp_matches/Valor reemplazado.{Nombre Torneo,3}","Section1/atp_matches/Origen.{surface,4}","Section1/atp_matches/Origen.{draw_size,5}","Section1/atp_matches/Origen.{tourney_level,6}","Section1/atp_matches/Origen.{tourney_date,7}","Section1/atp_matches/Origen.{match_num,8}","Section1/atp_matches/Origen.{1_id,9}","Section1/atp_matches/Tipo cambiado.{1_seed,10}","Section1/atp_matches/Origen.{1_entry,11}","Section1/atp_matches/Origen.{1_name,12}","Section1/atp_matches/Origen.{1_hand,13}","Section1/atp_matches/Origen.{1_ht,14}","Section1/atp_matches/Origen.{1_ioc,15}","Section1/atp_matches/Origen.{1_age,16}","Section1/atp_matches/Origen.{1_rank,17}","Section1/atp_matches/Origen.{1_rank_points,18}","Section1/atp_matches/Origen.{2_id,19}","Section1/atp_matches/Tipo cambiado.{2_seed,20}","Section1/atp_matches/Origen.{2_entry,21}","Section1/atp_matches/Origen.{2_name,22}","Section1/atp_matches/Origen.{2_hand,23}","Section1/atp_matches/Origen.{2_ht,24}","Section1/atp_matches/Origen.{2_ioc,25}","Section1/atp_matches/Origen.{2_age,26}","Section1/atp_matches/Origen.{2_rank,27}","Section1/atp_matches/Origen.{2_rank_points,28}","Section1/atp_matches/Origen.{score,29}","Section1/atp_matches/Origen.{best_of,30}","Section1/atp_matches/Origen.{round,31}","Section1/atp_matches/Origen.{minutes,32}","Section1/atp_matches/Origen.{1_ace,33}","Section1/atp_matches/Origen.{1_df,34}","Section1/atp_matches/Origen.{1_svpt,35}","Section1/atp_matches/Origen.{1_1stIn,36}","Section1/atp_matches/Origen.{1_1stWon,37}","Section1/atp_matches/Origen.{1_2ndWon,38}","Section1/atp_matches/Origen.{1_SvGms,39}","Section1/atp_matches/Origen.{1_bpSaved,40}","Section1/atp_matches/Origen.{1_bpFaced,41}","Section1/atp_matches/Origen.{2_ace,42}","Section1/atp_matches/Origen.{2_df,43}","Section1/atp_matches/Origen.{2_svpt,44}","Section1/atp_matches/Origen.{2_1stIn,45}","Section1/atp_matches/Origen.{2_1stWon,46}","Section1/atp_matches/Origen.{2_2ndWon,47}","Section1/atp_matches/Origen.{2_SvGms,48}","Section1/atp_matches/Origen.{2_bpSaved,49}","Section1/atp_matches/Origen.{2_bpFaced,50}","Section1/atp_matches/Origen.{W/L,51}"],"RelationshipInfo":[]}
+
+	annotation PBI_ResultType = Exception
+
+	annotation PBI_NavigationStepName = Navigation
+

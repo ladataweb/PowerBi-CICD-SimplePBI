@@ -1,0 +1,45 @@
+table Stats
+	lineageTag: a0c8f3ba-8cbc-4a27-830c-6ebd0cae2e03
+
+	measure Nacimiento =
+			
+			CONCATENATEX(Stats, Stats[Valor], ", ")
+		lineageTag: c219b798-f6bb-42b6-9df8-34afc322e48b
+
+	column Caracteristica
+		dataType: string
+		lineageTag: 9a225dc6-8033-4a0a-839b-665cdc104bba
+		summarizeBy: none
+		sourceColumn: Caracteristica
+
+		annotation SummarizationSetBy = Automatic
+
+	column Valor
+		dataType: string
+		lineageTag: 512b715b-35d2-451b-93d3-94828402191e
+		summarizeBy: none
+		sourceColumn: Valor
+
+		annotation SummarizationSetBy = Automatic
+
+	column Tipo
+		dataType: string
+		lineageTag: 939e1b0e-b856-465b-b409-6376ff3d2d0a
+		summarizeBy: none
+		sourceColumn: Tipo
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Stats-3382093a-cf28-4f00-a1e7-dbcb48d3aafe = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("hZLLTsMwEEV/xYrELlTNiyTLQlGFeIUWiUXFwk2GylJiIz9Y8Ecs+Ir+GJ66FbSDYBVFc2bm3jteLqOGbz5NFEcLJ965/85AguY9mOg5XkaXHe9YB0yDFVr5cp4QZtJbp7E1iauCDdYQogGDvb56vSbFC+FwyR1vxSBAWiTPuYGekLdcYnEqwFitYi/qbfNhUJ6TnA2hethyJUUrFGvVoFgzv0eRdV0R7HHzaV2vUHkyzqh+rq3olGFPpzeIpGfFaVqNCTcV/k+xSesG1/MO5STZeFTU+SjLahpcC9uNySgvUdNuTRilVj2wF95bjkw6Kov6CElAswXoN3ToS2cpO/mDYI0L2ZYl4dJOUa6g3IwPYNhCeBKk71lz6V2ivqom8KOyvA/TzJ70h5A/NZfjvzXPoRUrX9mN8WhGXR6opx1FQjruX5W2Tgr/7mD7fh6cgJWGcIw6Pz7GzsQ3iD4MrJ0I7nO6IkS1tx1UYWa4ovL3Lv7lu5AxDk7pKY5yPViQ01R/OwZmkx+Sz18=", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Caracteristica = _t, Valor = _t, Tipo = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Caracteristica", type text}, {"Valor", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

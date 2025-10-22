@@ -1,0 +1,64 @@
+table atp_players
+	lineageTag: cb336d52-5d23-4d4a-8c24-a80f2f4bdb67
+
+	column 'Nombre Jugador'
+		dataType: string
+		lineageTag: 39e46a65-7f91-451d-a189-a50117f2440f
+		summarizeBy: none
+		sourceColumn: Nombre Jugador
+
+		annotation SummarizationSetBy = Automatic
+
+	column player_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 26289dbf-846d-4c1c-afbf-7d1dcac93ec8
+		summarizeBy: none
+		sourceColumn: player_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mano
+		dataType: string
+		lineageTag: 9a64d1a4-9489-4dee-8892-265dbf9d38cf
+		summarizeBy: none
+		sourceColumn: Mano
+
+		annotation SummarizationSetBy = Automatic
+
+	column dob
+		dataType: string
+		lineageTag: 1a18a4a2-0bd1-4420-89e3-f01b8805d318
+		summarizeBy: none
+		sourceColumn: dob
+
+		annotation SummarizationSetBy = Automatic
+
+	column Pais
+		dataType: string
+		lineageTag: ce17570e-ba23-4341-b89c-8fabf4f77939
+		summarizeBy: none
+		sourceColumn: Pais
+
+		annotation SummarizationSetBy = Automatic
+
+	partition atp_players-2d01bca2-d976-4c47-8a3d-5bb75fa22ccf = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(Web.Contents("https://raw.githubusercontent.com/JeffSackmann/tennis_atp/master/atp_players.csv"),[Delimiter=",", Columns=6, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Origen, [PromoteAllScalars=true]),
+				    #"Renamed Columns" = Table.RenameColumns(#"Promoted Headers",{{"ioc", "country"}}),
+				    #"Tipo cambiado" = Table.TransformColumnTypes(#"Renamed Columns",{{"player_id", Int64.Type}, {"name_first", type text}, {"name_last", type text}, {"hand", type text}, {"country", type text}}),
+				    #"Columnas combinadas" = Table.CombineColumns(#"Tipo cambiado",{"name_first", "name_last"},Combiner.CombineTextByDelimiter(" ", QuoteStyle.None),"name"),
+				    #"Columnas con nombre cambiado1" = Table.RenameColumns(#"Columnas combinadas",{{"name", "Nombre Jugador"}, {"country", "Pais"},  {"hand", "Mano"}}),
+				    #"Filtered Rows" = Table.SelectRows(#"Columnas con nombre cambiado1", each [Nombre Jugador] = "Roger Federer")
+				in
+				    #"Filtered Rows"
+
+	annotation PBI_QueryRelationships = {"columnCount":5,"keyColumnNames":[],"queryRelationships":[],"columnIdentities":["Section1/atp_players/Tipo cambiado.{player_id,0}","Section1/atp_players/Columnas combinadas.{name,1}","Section1/atp_players/Tipo cambiado.{hand,3}","Section1/atp_players/Errores reemplazados.{birthdate,3}","Section1/atp_players/Tipo cambiado.{country,5}"],"ColumnCount":5,"KeyColumnNames":[],"ColumnIdentities":["Section1/atp_players/Tipo cambiado.{player_id,0}","Section1/atp_players/Columnas combinadas.{name,1}","Section1/atp_players/Tipo cambiado.{hand,3}","Section1/atp_players/Errores reemplazados.{birthdate,3}","Section1/atp_players/Tipo cambiado.{country,5}"],"RelationshipInfo":[]}
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

@@ -1,0 +1,89 @@
+table atp_rank_concolumnas
+	lineageTag: c787f332-d7fc-4a3d-a2f3-5d98d630a54e
+
+	column Column1
+		dataType: string
+		lineageTag: 954d5877-7783-4d5f-bb51-cc1c222df633
+		summarizeBy: none
+		sourceColumn: Column1
+
+		annotation SummarizationSetBy = Automatic
+
+	column Link
+		dataType: string
+		lineageTag: b8021d13-e073-492d-b877-62d131aedb38
+		summarizeBy: none
+		sourceColumn: Link
+
+		annotation SummarizationSetBy = Automatic
+
+	column ranking_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 59813dc9-c066-4cf0-8373-5f8570237f45
+		summarizeBy: none
+		sourceColumn: ranking_date
+
+		variation Variación
+			isDefault
+			relationship: ffd3cd52-cee1-4263-9725-3ad4091b6d29
+			defaultHierarchy: LocalDateTable_5f12a5cf-dc31-4cff-b4d0-a5a902b9242b.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column rank
+		dataType: int64
+		formatString: 0
+		lineageTag: 5019fd6d-f621-4fbd-b337-b6ece95cb637
+		summarizeBy: sum
+		sourceColumn: rank
+
+		annotation SummarizationSetBy = Automatic
+
+	column player
+		dataType: int64
+		formatString: 0
+		lineageTag: 339116ff-189c-4ded-bd74-68e42fbbd74e
+		summarizeBy: none
+		sourceColumn: player
+
+		annotation SummarizationSetBy = Automatic
+
+	column points
+		dataType: int64
+		formatString: 0
+		lineageTag: 1c13eb57-2ac3-4382-9258-ca27d4968e1c
+		summarizeBy: sum
+		sourceColumn: points
+
+		annotation SummarizationSetBy = Automatic
+
+	column year
+		dataType: int64
+		formatString: 0
+		lineageTag: dac41c8a-1d5b-499b-b3bd-1a7a5c77cb0a
+		summarizeBy: sum
+		sourceColumn: year
+
+		annotation SummarizationSetBy = Automatic
+
+	partition atp_rank_concolumnas-923de71a-b857-4807-b096-a5abfe36e176 = m
+		mode: import
+		source =
+				let
+				    Rank_List = {"00s","10s","70s","80s","90s", "current"},
+				    #"Convertida en tabla" = Table.FromList(Rank_List, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+				    #"Personalizada agregada" = Table.AddColumn(#"Convertida en tabla", "Link", each Text.Combine({"JeffSackmann/tennis_atp/master/atp_rankings_",Text.From([Column1]),".csv"}, "")),
+				    #"Personalizada agregada1" = Table.AddColumn(#"Personalizada agregada", "Data", each scalar_vector([Link])),
+				    #"Se expandió Data1" = Table.ExpandTableColumn(#"Personalizada agregada1", "Data", {"ranking_date", "rank", "player", "points"}, {"ranking_date", "rank", "player", "points"}),
+				    #"Tipo cambiado" = Table.TransformColumnTypes(#"Se expandió Data1",{{"rank", Int64.Type}, {"player", Int64.Type}, {"points", Int64.Type}, {"ranking_date", type date}, {"Column1", type text}, {"Link", type text}}),
+				    #"Año insertado" = Table.AddColumn(#"Tipo cambiado", "year", each Date.Year([ranking_date]), Int64.Type)
+				in
+				    #"Año insertado"
+
+	annotation PBI_QueryRelationships = {"columnCount":7,"keyColumnNames":[],"queryRelationships":[],"columnIdentities":["Section1/atp_rank_concolumnas/Tipo cambiado.{Column1,0}","Section1/atp_rank_concolumnas/Tipo cambiado.{Link,1}","Section1/atp_rank_concolumnas/Tipo cambiado.{ranking_date,2}","Section1/atp_rank_concolumnas/Tipo cambiado.{rank,3}","Section1/atp_rank_concolumnas/Tipo cambiado.{player,4}","Section1/atp_rank_concolumnas/Tipo cambiado.{points,5}","Section1/atp_rank_concolumnas/Año insertado.{year,6}"],"ColumnCount":7,"KeyColumnNames":[],"ColumnIdentities":["Section1/atp_rank_concolumnas/Tipo cambiado.{Column1,0}","Section1/atp_rank_concolumnas/Tipo cambiado.{Link,1}","Section1/atp_rank_concolumnas/Tipo cambiado.{ranking_date,2}","Section1/atp_rank_concolumnas/Tipo cambiado.{rank,3}","Section1/atp_rank_concolumnas/Tipo cambiado.{player,4}","Section1/atp_rank_concolumnas/Tipo cambiado.{points,5}","Section1/atp_rank_concolumnas/Año insertado.{year,6}"],"RelationshipInfo":[]}
+
+	annotation PBI_ResultType = Exception
+

@@ -1,0 +1,35 @@
+table year
+	lineageTag: 9542b5ff-9416-4ba9-b168-aef9bfb1cf0e
+
+	column Año
+		dataType: int64
+		formatString: 0
+		lineageTag: f2ab0d3b-96cc-43d4-b66a-a835403a659d
+		summarizeBy: none
+		sourceColumn: Año
+
+		annotation SummarizationSetBy = Automatic
+
+	partition year-5790a1a3-12cb-4f12-b5ef-ddc1745f823a = m
+		mode: import
+		source =
+				let
+				    StartDate = 1998,
+				    EndDate = 2022,
+				//Get the number of dates that will be required for the table
+				    GetDateCount = (EndDate - StartDate)+1,
+				//Take the count of dates and turn it into a list of dates
+				    GetDateList = List.Numbers(StartDate, GetDateCount, 1),
+				    #"Convertida en tabla" = Table.FromList(GetDateList, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+				    #"Columnas con nombre cambiado" = Table.RenameColumns(#"Convertida en tabla",{{"Column1", "year"}}),
+				    #"Tipo cambiado" = Table.TransformColumnTypes(#"Columnas con nombre cambiado",{{"year", Int64.Type}}),
+				    #"Columnas con nombre cambiado1" = Table.RenameColumns(#"Tipo cambiado",{{"year", "Año"}})
+				in
+				    #"Columnas con nombre cambiado1"
+
+	annotation PBI_QueryRelationships = {"columnCount":1,"keyColumnNames":[],"queryRelationships":[],"columnIdentities":["Section1/year/Tipo cambiado.{year,0}"],"ColumnCount":1,"KeyColumnNames":[],"ColumnIdentities":["Section1/year/Tipo cambiado.{year,0}"],"RelationshipInfo":[]}
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

@@ -1,0 +1,153 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
+  "name": "ReportSection732001f0cfab4df2ddc9",
+  "displayName": "Stats General",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "objects": {
+    "outspace": [
+      {
+        "properties": {
+          "image": {
+            "image": {
+              "name": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'Tenis-bg.png'"
+                  }
+                }
+              },
+              "url": {
+                "expr": {
+                  "ResourcePackageItem": {
+                    "PackageName": "RegisteredResources",
+                    "PackageType": 1,
+                    "ItemName": "Tenis-bg5726738288929836.png"
+                  }
+                }
+              },
+              "scaling": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'Fit'"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "background": [
+      {
+        "properties": {
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "80D"
+              }
+            }
+          },
+          "image": {
+            "image": {
+              "name": {
+                "expr": {
+                  "Literal": {
+                    "Value": "''"
+                  }
+                }
+              },
+              "url": {
+                "expr": {
+                  "Literal": {
+                    "Value": "''"
+                  }
+                }
+              }
+            }
+          },
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "ThemeDataColor": {
+                    "ColorId": 1,
+                    "Percent": 0
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "visualInteractions": [
+    {
+      "source": "cdc2e3fa1c2acd8534b5",
+      "target": "f4a98e2e648ec7567956",
+      "type": "NoFilter"
+    },
+    {
+      "source": "3a439b915de682156875",
+      "target": "3097e2449d57dd05226c",
+      "type": "NoFilter"
+    },
+    {
+      "source": "3a439b915de682156875",
+      "target": "57a729a3afd72004140d",
+      "type": "NoFilter"
+    },
+    {
+      "source": "3a439b915de682156875",
+      "target": "d3105510ba043fa8c5a5",
+      "type": "NoFilter"
+    },
+    {
+      "source": "3a439b915de682156875",
+      "target": "bf7dab8149a6d70f7744",
+      "type": "NoFilter"
+    },
+    {
+      "source": "835d78f150dfc2ab3206",
+      "target": "57a729a3afd72004140d",
+      "type": "NoFilter"
+    },
+    {
+      "source": "835d78f150dfc2ab3206",
+      "target": "d3105510ba043fa8c5a5",
+      "type": "NoFilter"
+    },
+    {
+      "source": "835d78f150dfc2ab3206",
+      "target": "3097e2449d57dd05226c",
+      "type": "NoFilter"
+    },
+    {
+      "source": "835d78f150dfc2ab3206",
+      "target": "bf7dab8149a6d70f7744",
+      "type": "NoFilter"
+    },
+    {
+      "source": "3e74c5e696e7ffa4fe39",
+      "target": "57a729a3afd72004140d",
+      "type": "NoFilter"
+    },
+    {
+      "source": "3e74c5e696e7ffa4fe39",
+      "target": "d3105510ba043fa8c5a5",
+      "type": "NoFilter"
+    },
+    {
+      "source": "3e74c5e696e7ffa4fe39",
+      "target": "3097e2449d57dd05226c",
+      "type": "NoFilter"
+    },
+    {
+      "source": "3e74c5e696e7ffa4fe39",
+      "target": "bf7dab8149a6d70f7744",
+      "type": "NoFilter"
+    }
+  ]
+}

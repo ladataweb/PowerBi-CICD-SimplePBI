@@ -1,0 +1,21 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmarksMetadata/1.0.0/schema.json",
+  "items": [
+    {
+      "name": "Bookmarkbe262121c573304459f4",
+      "displayName": "StatsGeneral",
+      "children": [
+        "Bookmark26365b257ceb41671c56",
+        "Bookmark57b83dbd5ff7346fac61"
+      ]
+    },
+    {
+      "name": "Bookmarkb449fb3d980e0c95c785",
+      "displayName": "VS Rivales",
+      "children": [
+        "Bookmark5ba4a609a608a735d209",
+        "Bookmark6aa226edc0b7066465f7"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,450 @@
+table atp_matches_qual_chall
+	lineageTag: 9e632268-676e-4099-9034-549f054be109
+
+	column year
+		dataType: int64
+		formatString: 0
+		lineageTag: 5c63ab44-89ce-434f-95ba-e52e38aa8645
+		summarizeBy: none
+		sourceColumn: year
+
+		annotation SummarizationSetBy = Automatic
+
+	column Link
+		dataType: string
+		lineageTag: a34e44c7-efa6-4af2-8fbd-c3dcbfdf2418
+		summarizeBy: none
+		sourceColumn: Link
+
+		annotation SummarizationSetBy = Automatic
+
+	column tourney_id
+		dataType: string
+		lineageTag: 84181039-5639-4eb5-a19d-5066e66e27d3
+		summarizeBy: none
+		sourceColumn: tourney_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column tourney_name
+		dataType: string
+		lineageTag: bbbc5d9f-7d27-47db-b366-5b8c64fd3c7a
+		summarizeBy: none
+		sourceColumn: tourney_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column surface
+		dataType: string
+		lineageTag: 4b01e908-3a66-447d-8e9d-91a7ad1398dd
+		summarizeBy: none
+		sourceColumn: surface
+
+		annotation SummarizationSetBy = Automatic
+
+	column draw_size
+		dataType: int64
+		formatString: 0
+		lineageTag: 1e7c87d9-3032-41dc-a27e-549a86d3c8ef
+		summarizeBy: sum
+		sourceColumn: draw_size
+
+		annotation SummarizationSetBy = Automatic
+
+	column tourney_level
+		dataType: string
+		lineageTag: 61159f63-8911-4a26-aec7-cca868f48607
+		summarizeBy: none
+		sourceColumn: tourney_level
+
+		annotation SummarizationSetBy = Automatic
+
+	column tourney_date
+		dataType: int64
+		formatString: 0
+		lineageTag: ddf00d94-8aa9-4920-9288-9d9702f462cc
+		summarizeBy: sum
+		sourceColumn: tourney_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column match_num
+		dataType: int64
+		formatString: 0
+		lineageTag: adc097c1-8e65-4195-8b37-0ae200edcab0
+		summarizeBy: sum
+		sourceColumn: match_num
+
+		annotation SummarizationSetBy = Automatic
+
+	column winner_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 05c2f3d6-06c3-4329-986e-48236473409c
+		summarizeBy: sum
+		sourceColumn: winner_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column winner_seed
+		dataType: int64
+		formatString: 0
+		lineageTag: 140a5a23-b41f-4761-adf8-783cbd9b19e4
+		summarizeBy: sum
+		sourceColumn: winner_seed
+
+		annotation SummarizationSetBy = Automatic
+
+	column winner_entry
+		dataType: string
+		lineageTag: 14b2cb94-e2e1-426e-b44c-b41d92106ed2
+		summarizeBy: none
+		sourceColumn: winner_entry
+
+		annotation SummarizationSetBy = Automatic
+
+	column winner_name
+		dataType: string
+		lineageTag: 6b7f8f2e-8e3d-4aba-87d0-e619e7cd56fd
+		summarizeBy: none
+		sourceColumn: winner_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column winner_hand
+		dataType: string
+		lineageTag: 2c0a7e73-106a-4c5e-86d2-3a3f2b7b9270
+		summarizeBy: none
+		sourceColumn: winner_hand
+
+		annotation SummarizationSetBy = Automatic
+
+	column winner_ht
+		dataType: int64
+		formatString: 0
+		lineageTag: ddbbb4f4-37ae-4975-93bb-501d4745fc40
+		summarizeBy: sum
+		sourceColumn: winner_ht
+
+		annotation SummarizationSetBy = Automatic
+
+	column winner_ioc
+		dataType: string
+		lineageTag: 0895c009-f3cd-48ee-b5bc-f760e3b54858
+		summarizeBy: none
+		sourceColumn: winner_ioc
+
+		annotation SummarizationSetBy = Automatic
+
+	column winner_age
+		dataType: int64
+		formatString: 0
+		lineageTag: 8bb7fdb5-7a06-4dfa-b2cd-bf6f3a6ebbe4
+		summarizeBy: sum
+		sourceColumn: winner_age
+
+		annotation SummarizationSetBy = Automatic
+
+	column winner_rank
+		dataType: string
+		lineageTag: eb0d6807-cd94-454c-a927-1642ae0ff3c3
+		summarizeBy: none
+		sourceColumn: winner_rank
+
+		annotation SummarizationSetBy = Automatic
+
+	column winner_rank_points
+		dataType: string
+		lineageTag: 67c17253-1a4e-46b3-92ab-45a8ede95b41
+		summarizeBy: none
+		sourceColumn: winner_rank_points
+
+		annotation SummarizationSetBy = Automatic
+
+	column loser_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 89614919-5b36-45ff-82d3-af08407fda07
+		summarizeBy: sum
+		sourceColumn: loser_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column loser_seed
+		dataType: int64
+		formatString: 0
+		lineageTag: 060aef98-3ee6-4ea2-9ff3-a7ed9b3d3e73
+		summarizeBy: sum
+		sourceColumn: loser_seed
+
+		annotation SummarizationSetBy = Automatic
+
+	column loser_entry
+		dataType: string
+		lineageTag: d4c2f9e3-c919-406a-9c02-e41ec90cefad
+		summarizeBy: none
+		sourceColumn: loser_entry
+
+		annotation SummarizationSetBy = Automatic
+
+	column loser_name
+		dataType: string
+		lineageTag: 34b94f02-e058-4cd9-8d6f-6abe5ee350ed
+		summarizeBy: none
+		sourceColumn: loser_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column loser_hand
+		dataType: string
+		lineageTag: f2ae46cf-dc54-4695-823a-fb556d4cd36d
+		summarizeBy: none
+		sourceColumn: loser_hand
+
+		annotation SummarizationSetBy = Automatic
+
+	column loser_ht
+		dataType: int64
+		formatString: 0
+		lineageTag: 8c6e29c2-c2e7-4860-9636-70861d2b31e3
+		summarizeBy: sum
+		sourceColumn: loser_ht
+
+		annotation SummarizationSetBy = Automatic
+
+	column loser_ioc
+		dataType: string
+		lineageTag: d57faa43-f0a6-47f5-b4fb-82db9287b4fa
+		summarizeBy: none
+		sourceColumn: loser_ioc
+
+		annotation SummarizationSetBy = Automatic
+
+	column loser_age
+		dataType: int64
+		formatString: 0
+		lineageTag: 949b0471-dc72-46b8-aa39-cd85c51b5fc4
+		summarizeBy: sum
+		sourceColumn: loser_age
+
+		annotation SummarizationSetBy = Automatic
+
+	column loser_rank
+		dataType: string
+		lineageTag: 429f26fa-9ddc-48f3-b5c3-8f5e491d3f15
+		summarizeBy: none
+		sourceColumn: loser_rank
+
+		annotation SummarizationSetBy = Automatic
+
+	column loser_rank_points
+		dataType: string
+		lineageTag: 3831b647-e1dd-4e93-bfb5-cb10e55f4675
+		summarizeBy: none
+		sourceColumn: loser_rank_points
+
+		annotation SummarizationSetBy = Automatic
+
+	column score
+		dataType: string
+		lineageTag: ec3720cd-397b-46d6-8de8-3b2c25c200c6
+		summarizeBy: none
+		sourceColumn: score
+
+		annotation SummarizationSetBy = Automatic
+
+	column best_of
+		dataType: int64
+		formatString: 0
+		lineageTag: 26965254-0eb5-4edb-8521-e67d4065c285
+		summarizeBy: sum
+		sourceColumn: best_of
+
+		annotation SummarizationSetBy = Automatic
+
+	column round
+		dataType: string
+		lineageTag: 0b214199-aef2-4809-993d-f7e76afaf446
+		summarizeBy: none
+		sourceColumn: round
+
+		annotation SummarizationSetBy = Automatic
+
+	column minutes
+		dataType: string
+		lineageTag: baf84eb8-f570-458e-a22c-50fa0688053d
+		summarizeBy: none
+		sourceColumn: minutes
+
+		annotation SummarizationSetBy = Automatic
+
+	column w_ace
+		dataType: string
+		lineageTag: f64af5c4-8bf4-40c4-b8de-6f6bfbecf46b
+		summarizeBy: none
+		sourceColumn: w_ace
+
+		annotation SummarizationSetBy = Automatic
+
+	column w_df
+		dataType: string
+		lineageTag: d77bc654-9911-4afe-ad52-832cc52832d8
+		summarizeBy: none
+		sourceColumn: w_df
+
+		annotation SummarizationSetBy = Automatic
+
+	column w_svpt
+		dataType: string
+		lineageTag: 93683de6-e93c-47d1-be8c-60b8d2eca9f8
+		summarizeBy: none
+		sourceColumn: w_svpt
+
+		annotation SummarizationSetBy = Automatic
+
+	column w_1stIn
+		dataType: string
+		lineageTag: daec327c-5dce-4949-ae4b-185ddeb7d44d
+		summarizeBy: none
+		sourceColumn: w_1stIn
+
+		annotation SummarizationSetBy = Automatic
+
+	column w_1stWon
+		dataType: string
+		lineageTag: 9ec39564-3b5d-4f66-a6af-484376dd1181
+		summarizeBy: none
+		sourceColumn: w_1stWon
+
+		annotation SummarizationSetBy = Automatic
+
+	column w_2ndWon
+		dataType: string
+		lineageTag: 53d66341-c648-44e3-9d49-0bd14047f1e7
+		summarizeBy: none
+		sourceColumn: w_2ndWon
+
+		annotation SummarizationSetBy = Automatic
+
+	column w_SvGms
+		dataType: string
+		lineageTag: 82fa2338-f1cd-4143-b08e-665e5e989467
+		summarizeBy: none
+		sourceColumn: w_SvGms
+
+		annotation SummarizationSetBy = Automatic
+
+	column w_bpSaved
+		dataType: string
+		lineageTag: 6bde629a-75ed-455d-ac11-767ddead0136
+		summarizeBy: none
+		sourceColumn: w_bpSaved
+
+		annotation SummarizationSetBy = Automatic
+
+	column w_bpFaced
+		dataType: string
+		lineageTag: 78717f3e-03b6-4da1-be91-ce87a3826c15
+		summarizeBy: none
+		sourceColumn: w_bpFaced
+
+		annotation SummarizationSetBy = Automatic
+
+	column l_ace
+		dataType: string
+		lineageTag: 9c83ab49-b922-4ec5-9f49-4701d76d18c9
+		summarizeBy: none
+		sourceColumn: l_ace
+
+		annotation SummarizationSetBy = Automatic
+
+	column l_df
+		dataType: string
+		lineageTag: b0009657-ca2f-457a-8a79-2c3173d6f5a6
+		summarizeBy: none
+		sourceColumn: l_df
+
+		annotation SummarizationSetBy = Automatic
+
+	column l_svpt
+		dataType: string
+		lineageTag: aa3d65c0-bc8a-41d5-8d82-be6f5d1bc865
+		summarizeBy: none
+		sourceColumn: l_svpt
+
+		annotation SummarizationSetBy = Automatic
+
+	column l_1stIn
+		dataType: string
+		lineageTag: 5b109e9f-eecb-40ea-b71c-ddbaf548ee3e
+		summarizeBy: none
+		sourceColumn: l_1stIn
+
+		annotation SummarizationSetBy = Automatic
+
+	column l_1stWon
+		dataType: string
+		lineageTag: 7d82fe75-03dc-452e-8b2c-57f39b00da79
+		summarizeBy: none
+		sourceColumn: l_1stWon
+
+		annotation SummarizationSetBy = Automatic
+
+	column l_2ndWon
+		dataType: string
+		lineageTag: 46c21be6-7d7f-4171-a367-4b98e6416a18
+		summarizeBy: none
+		sourceColumn: l_2ndWon
+
+		annotation SummarizationSetBy = Automatic
+
+	column l_SvGms
+		dataType: string
+		lineageTag: 17701a14-0904-4758-a1ed-8c9a2e4263c4
+		summarizeBy: none
+		sourceColumn: l_SvGms
+
+		annotation SummarizationSetBy = Automatic
+
+	column l_bpSaved
+		dataType: string
+		lineageTag: 6f696ab4-6c26-4c75-9177-49d06dce43c7
+		summarizeBy: none
+		sourceColumn: l_bpSaved
+
+		annotation SummarizationSetBy = Automatic
+
+	column l_bpFaced
+		dataType: string
+		lineageTag: a6553891-2b8a-4bac-a7bc-03502fac189f
+		summarizeBy: none
+		sourceColumn: l_bpFaced
+
+		annotation SummarizationSetBy = Automatic
+
+	partition atp_matches_qual_chall-39c34f10-9368-4acc-9f64-5abf9c016802 = m
+		mode: import
+		source =
+				let
+				    StartDate = 1978,
+				    EndDate = Date.Year(DateTime.LocalNow()),
+				//Get the number of dates that will be required for the table
+				    GetDateCount = (EndDate - StartDate)+1,
+				//Take the count of dates and turn it into a list of dates
+				    GetDateList = List.Numbers(StartDate, GetDateCount, 1),
+				    #"Convertida en tabla" = Table.FromList(GetDateList, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+				    #"Personalizada agregada" = Table.AddColumn(#"Convertida en tabla", "Link", each Text.Combine({"JeffSackmann/tennis_atp/master/atp_matches_qual_chall_",Text.From([Column1]),".csv"}, "")),
+				    #"Personalizada agregada1" = Table.AddColumn(#"Personalizada agregada", "Data", each scalar_vector([Link])),
+				    #"Se expandió Data" = Table.ExpandTableColumn(#"Personalizada agregada1", "Data", {"tourney_id", "tourney_name", "surface", "draw_size", "tourney_level", "tourney_date", "match_num", "winner_id", "winner_seed", "winner_entry", "winner_name", "winner_hand", "winner_ht", "winner_ioc", "winner_age", "winner_rank", "winner_rank_points", "loser_id", "loser_seed", "loser_entry", "loser_name", "loser_hand", "loser_ht", "loser_ioc", "loser_age", "loser_rank", "loser_rank_points", "score", "best_of", "round", "minutes", "w_ace", "w_df", "w_svpt", "w_1stIn", "w_1stWon", "w_2ndWon", "w_SvGms", "w_bpSaved", "w_bpFaced", "l_ace", "l_df", "l_svpt", "l_1stIn", "l_1stWon", "l_2ndWon", "l_SvGms", "l_bpSaved", "l_bpFaced"}, {"tourney_id", "tourney_name", "surface", "draw_size", "tourney_level", "tourney_date", "match_num", "winner_id", "winner_seed", "winner_entry", "winner_name", "winner_hand", "winner_ht", "winner_ioc", "winner_age", "winner_rank", "winner_rank_points", "loser_id", "loser_seed", "loser_entry", "loser_name", "loser_hand", "loser_ht", "loser_ioc", "loser_age", "loser_rank", "loser_rank_points", "score", "best_of", "round", "minutes", "w_ace", "w_df", "w_svpt", "w_1stIn", "w_1stWon", "w_2ndWon", "w_SvGms", "w_bpSaved", "w_bpFaced", "l_ace", "l_df", "l_svpt", "l_1stIn", "l_1stWon", "l_2ndWon", "l_SvGms", "l_bpSaved", "l_bpFaced"}),
+				    #"Columnas con nombre cambiado" = Table.RenameColumns(#"Se expandió Data",{{"Column1", "year"}}),
+				    #"Tipo cambiado" = Table.TransformColumnTypes(#"Columnas con nombre cambiado",{{"tourney_id", type text}, {"tourney_name", type text}, {"surface", type text}, {"draw_size", Int64.Type}, {"tourney_level", type text}, {"tourney_date", Int64.Type}, {"match_num", Int64.Type}, {"winner_id", Int64.Type}, {"winner_seed", Int64.Type}, {"winner_entry", type text}, {"winner_name", type text}, {"winner_hand", type text}, {"winner_ht", Int64.Type}, {"winner_ioc", type text}, {"winner_age", Int64.Type}, {"winner_rank", type text}, {"winner_rank_points", type text}, {"loser_id", Int64.Type}, {"loser_seed", Int64.Type}, {"loser_entry", type text}, {"loser_name", type text}, {"loser_hand", type text}, {"loser_ht", Int64.Type}, {"loser_ioc", type text}, {"loser_age", Int64.Type}, {"loser_rank", type text}, {"loser_rank_points", type text}, {"score", type text}, {"best_of", Int64.Type}, {"round", type text}, {"minutes", type text}, {"w_ace", type text}, {"w_df", type text}, {"w_svpt", type text}, {"w_1stIn", type text}, {"w_1stWon", type text}, {"w_2ndWon", type text}, {"w_SvGms", type text}, {"w_bpSaved", type text}, {"w_bpFaced", type text}, {"l_ace", type text}, {"l_df", type text}, {"l_svpt", type text}, {"l_1stIn", type text}, {"l_1stWon", type text}, {"l_2ndWon", type text}, {"l_SvGms", type text}, {"l_bpSaved", type text}, {"l_bpFaced", type text}, {"year", Int64.Type}}),
+				    #"Filtered Rows" = Table.SelectRows(#"Tipo cambiado", each [winner_name] = "Roger Federer" or [loser_name] = "Roger Federer")
+				in
+				    #"Filtered Rows"
+
+	annotation PBI_QueryRelationships = {"columnCount":51,"keyColumnNames":[],"queryRelationships":[],"columnIdentities":["Section1/atp_matches_qual_chall/Tipo cambiado.{year,0}","Section1/atp_matches_qual_chall/Personalizada agregada.{Link,1}","Section1/atp_matches_qual_chall/Tipo cambiado.{tourney_id,2}","Section1/atp_matches_qual_chall/Tipo cambiado.{tourney_name,3}","Section1/atp_matches_qual_chall/Tipo cambiado.{surface,4}","Section1/atp_matches_qual_chall/Tipo cambiado.{draw_size,5}","Section1/atp_matches_qual_chall/Tipo cambiado.{tourney_level,6}","Section1/atp_matches_qual_chall/Tipo cambiado.{tourney_date,7}","Section1/atp_matches_qual_chall/Tipo cambiado.{match_num,8}","Section1/atp_matches_qual_chall/Tipo cambiado.{winner_id,9}","Section1/atp_matches_qual_chall/Tipo cambiado.{winner_seed,10}","Section1/atp_matches_qual_chall/Tipo cambiado.{winner_entry,11}","Section1/atp_matches_qual_chall/Tipo cambiado.{winner_name,12}","Section1/atp_matches_qual_chall/Tipo cambiado.{winner_hand,13}","Section1/atp_matches_qual_chall/Tipo cambiado.{winner_ht,14}","Section1/atp_matches_qual_chall/Tipo cambiado.{winner_ioc,15}","Section1/atp_matches_qual_chall/Tipo cambiado.{winner_age,16}","Section1/atp_matches_qual_chall/Tipo cambiado.{winner_rank,17}","Section1/atp_matches_qual_chall/Tipo cambiado.{winner_rank_points,18}","Section1/atp_matches_qual_chall/Tipo cambiado.{loser_id,19}","Section1/atp_matches_qual_chall/Tipo cambiado.{loser_seed,20}","Section1/atp_matches_qual_chall/Tipo cambiado.{loser_entry,21}","Section1/atp_matches_qual_chall/Tipo cambiado.{loser_name,22}","Section1/atp_matches_qual_chall/Tipo cambiado.{loser_hand,23}","Section1/atp_matches_qual_chall/Tipo cambiado.{loser_ht,24}","Section1/atp_matches_qual_chall/Tipo cambiado.{loser_ioc,25}","Section1/atp_matches_qual_chall/Tipo cambiado.{loser_age,26}","Section1/atp_matches_qual_chall/Tipo cambiado.{loser_rank,27}","Section1/atp_matches_qual_chall/Tipo cambiado.{loser_rank_points,28}","Section1/atp_matches_qual_chall/Tipo cambiado.{score,29}","Section1/atp_matches_qual_chall/Tipo cambiado.{best_of,30}","Section1/atp_matches_qual_chall/Tipo cambiado.{round,31}","Section1/atp_matches_qual_chall/Tipo cambiado.{minutes,32}","Section1/atp_matches_qual_chall/Tipo cambiado.{w_ace,33}","Section1/atp_matches_qual_chall/Tipo cambiado.{w_df,34}","Section1/atp_matches_qual_chall/Tipo cambiado.{w_svpt,35}","Section1/atp_matches_qual_chall/Tipo cambiado.{w_1stIn,36}","Section1/atp_matches_qual_chall/Tipo cambiado.{w_1stWon,37}","Section1/atp_matches_qual_chall/Tipo cambiado.{w_2ndWon,38}","Section1/atp_matches_qual_chall/Tipo cambiado.{w_SvGms,39}","Section1/atp_matches_qual_chall/Tipo cambiado.{w_bpSaved,40}","Section1/atp_matches_qual_chall/Tipo cambiado.{w_bpFaced,41}","Section1/atp_matches_qual_chall/Tipo cambiado.{l_ace,42}","Section1/atp_matches_qual_chall/Tipo cambiado.{l_df,43}","Section1/atp_matches_qual_chall/Tipo cambiado.{l_svpt,44}","Section1/atp_matches_qual_chall/Tipo cambiado.{l_1stIn,45}","Section1/atp_matches_qual_chall/Tipo cambiado.{l_1stWon,46}","Section1/atp_matches_qual_chall/Tipo cambiado.{l_2ndWon,47}","Section1/atp_matches_qual_chall/Tipo cambiado.{l_SvGms,48}","Section1/atp_matches_qual_chall/Tipo cambiado.{l_bpSaved,49}","Section1/atp_matches_qual_chall/Tipo cambiado.{l_bpFaced,50}"],"ColumnCount":51,"KeyColumnNames":[],"ColumnIdentities":["Section1/atp_matches_qual_chall/Tipo cambiado.{year,0}","Section1/atp_matches_qual_chall/Personalizada agregada.{Link,1}","Section1/atp_matches_qual_chall/Tipo cambiado.{tourney_id,2}","Section1/atp_matches_qual_chall/Tipo cambiado.{tourney_name,3}","Section1/atp_matches_qual_chall/Tipo cambiado.{surface,4}","Section1/atp_matches_qual_chall/Tipo cambiado.{draw_size,5}","Section1/atp_matches_qual_chall/Tipo cambiado.{tourney_level,6}","Section1/atp_matches_qual_chall/Tipo cambiado.{tourney_date,7}","Section1/atp_matches_qual_chall/Tipo cambiado.{match_num,8}","Section1/atp_matches_qual_chall/Tipo cambiado.{winner_id,9}","Section1/atp_matches_qual_chall/Tipo cambiado.{winner_seed,10}","Section1/atp_matches_qual_chall/Tipo cambiado.{winner_entry,11}","Section1/atp_matches_qual_chall/Tipo cambiado.{winner_name,12}","Section1/atp_matches_qual_chall/Tipo cambiado.{winner_hand,13}","Section1/atp_matches_qual_chall/Tipo cambiado.{winner_ht,14}","Section1/atp_matches_qual_chall/Tipo cambiado.{winner_ioc,15}","Section1/atp_matches_qual_chall/Tipo cambiado.{winner_age,16}","Section1/atp_matches_qual_chall/Tipo cambiado.{winner_rank,17}","Section1/atp_matches_qual_chall/Tipo cambiado.{winner_rank_points,18}","Section1/atp_matches_qual_chall/Tipo cambiado.{loser_id,19}","Section1/atp_matches_qual_chall/Tipo cambiado.{loser_seed,20}","Section1/atp_matches_qual_chall/Tipo cambiado.{loser_entry,21}","Section1/atp_matches_qual_chall/Tipo cambiado.{loser_name,22}","Section1/atp_matches_qual_chall/Tipo cambiado.{loser_hand,23}","Section1/atp_matches_qual_chall/Tipo cambiado.{loser_ht,24}","Section1/atp_matches_qual_chall/Tipo cambiado.{loser_ioc,25}","Section1/atp_matches_qual_chall/Tipo cambiado.{loser_age,26}","Section1/atp_matches_qual_chall/Tipo cambiado.{loser_rank,27}","Section1/atp_matches_qual_chall/Tipo cambiado.{loser_rank_points,28}","Section1/atp_matches_qual_chall/Tipo cambiado.{score,29}","Section1/atp_matches_qual_chall/Tipo cambiado.{best_of,30}","Section1/atp_matches_qual_chall/Tipo cambiado.{round,31}","Section1/atp_matches_qual_chall/Tipo cambiado.{minutes,32}","Section1/atp_matches_qual_chall/Tipo cambiado.{w_ace,33}","Section1/atp_matches_qual_chall/Tipo cambiado.{w_df,34}","Section1/atp_matches_qual_chall/Tipo cambiado.{w_svpt,35}","Section1/atp_matches_qual_chall/Tipo cambiado.{w_1stIn,36}","Section1/atp_matches_qual_chall/Tipo cambiado.{w_1stWon,37}","Section1/atp_matches_qual_chall/Tipo cambiado.{w_2ndWon,38}","Section1/atp_matches_qual_chall/Tipo cambiado.{w_SvGms,39}","Section1/atp_matches_qual_chall/Tipo cambiado.{w_bpSaved,40}","Section1/atp_matches_qual_chall/Tipo cambiado.{w_bpFaced,41}","Section1/atp_matches_qual_chall/Tipo cambiado.{l_ace,42}","Section1/atp_matches_qual_chall/Tipo cambiado.{l_df,43}","Section1/atp_matches_qual_chall/Tipo cambiado.{l_svpt,44}","Section1/atp_matches_qual_chall/Tipo cambiado.{l_1stIn,45}","Section1/atp_matches_qual_chall/Tipo cambiado.{l_1stWon,46}","Section1/atp_matches_qual_chall/Tipo cambiado.{l_2ndWon,47}","Section1/atp_matches_qual_chall/Tipo cambiado.{l_SvGms,48}","Section1/atp_matches_qual_chall/Tipo cambiado.{l_bpSaved,49}","Section1/atp_matches_qual_chall/Tipo cambiado.{l_bpFaced,50}"],"RelationshipInfo":[]}
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

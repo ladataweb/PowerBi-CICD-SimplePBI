@@ -1,0 +1,168 @@
+expression atp_matches_W = ```
+		let
+		    StartDate = 1968,
+		    EndDate = Date.Year(DateTime.LocalNow()),
+		//Get the number of dates that will be required for the table
+		    GetDateCount = (EndDate - StartDate)+1,
+		//Take the count of dates and turn it into a list of dates
+		    GetDateList = List.Numbers(StartDate, GetDateCount, 1),
+		    #"Convertida en tabla" = Table.FromList(GetDateList, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+		    #"Personalizada agregada" = Table.AddColumn(#"Convertida en tabla", "Link", each Text.Combine({"JeffSackmann/tennis_atp/master/atp_matches_",Text.From([Column1]),".csv"}, "")),
+		    #"Personalizada agregada1" = Table.AddColumn(#"Personalizada agregada", "Data", each scalar_vector([Link])),
+		    #"Se expandió Data" = Table.ExpandTableColumn(#"Personalizada agregada1", "Data", {"tourney_id", "tourney_name", "surface", "draw_size", "tourney_level", "tourney_date", "match_num", "winner_id", "winner_seed", "winner_entry", "winner_name", "winner_hand", "winner_ht", "winner_ioc", "winner_age", "winner_rank", "winner_rank_points", "loser_id", "loser_seed", "loser_entry", "loser_name", "loser_hand", "loser_ht", "loser_ioc", "loser_age", "loser_rank", "loser_rank_points", "score", "best_of", "round", "minutes", "w_ace", "w_df", "w_svpt", "w_1stIn", "w_1stWon", "w_2ndWon", "w_SvGms", "w_bpSaved", "w_bpFaced", "l_ace", "l_df", "l_svpt", "l_1stIn", "l_1stWon", "l_2ndWon", "l_SvGms", "l_bpSaved", "l_bpFaced"}, {"tourney_id", "tourney_name", "surface", "draw_size", "tourney_level", "tourney_date", "match_num", "winner_id", "winner_seed", "winner_entry", "winner_name", "winner_hand", "winner_ht", "winner_ioc", "winner_age", "winner_rank", "winner_rank_points", "loser_id", "loser_seed", "loser_entry", "loser_name", "loser_hand", "loser_ht", "loser_ioc", "loser_age", "loser_rank", "loser_rank_points", "score", "best_of", "round", "minutes", "w_ace", "w_df", "w_svpt", "w_1stIn", "w_1stWon", "w_2ndWon", "w_SvGms", "w_bpSaved", "w_bpFaced", "l_ace", "l_df", "l_svpt", "l_1stIn", "l_1stWon", "l_2ndWon", "l_SvGms", "l_bpSaved", "l_bpFaced"}),
+		    #"Filtered Rows" = Table.SelectRows(#"Se expandió Data", each ([winner_name] = "Roger Federer")),
+		    #"Columnas con nombre cambiado" = Table.RenameColumns(#"Filtered Rows",{{"Column1", "year"}}),
+		    Personalizado1 = // Multiples reemplazos de Meses.		
+		let
+		    Source = #"Columnas con nombre cambiado",
+		    Substitutions = [
+		        #"G" = "Grand Slams",
+		        #"M" = "Masters 100s", 
+		        #"A" = "other tour-level events", 
+		        #"C" = "Challengers", 
+		        #"S" = "Satellites/ITFs", 
+		        #"F" = "Tour finals",
+		        #"D" = "Davis Cup"],
+		    Substituted = Table.TransformColumns(Source, {{"tourney_level", each Record.FieldOrDefault(Substitutions, Text.From(_), _)}})
+		in
+		    Substituted,
+		    #"Tipo cambiado" = Table.TransformColumnTypes(Personalizado1,{{"tourney_id", type text}, {"tourney_name", type text}, {"surface", type text}, {"draw_size", Int64.Type}, {"tourney_level", type text}, {"tourney_date", type date}, {"match_num", Int64.Type}, {"winner_id", Int64.Type}, {"winner_seed", Int64.Type}, {"winner_entry", type text}, {"winner_name", type text}, {"winner_hand", type text}, {"winner_ht", Int64.Type}, {"winner_ioc", type text}, {"winner_age", Int64.Type}, {"winner_rank", type text}, {"winner_rank_points", type text}, {"loser_id", Int64.Type}, {"loser_seed", Int64.Type}, {"loser_entry", type text}, {"loser_name", type text}, {"loser_hand", type text}, {"loser_ht", Int64.Type}, {"loser_ioc", type text}, {"loser_age", Int64.Type}, {"loser_rank", type text}, {"loser_rank_points", type text}, {"score", type text}, {"best_of", Int64.Type}, {"round", type text}, {"minutes", type text}, {"w_ace", type text}, {"w_df", type text}, {"w_svpt", type text}, {"w_1stIn", type text}, {"w_1stWon", type text}, {"w_2ndWon", type text}, {"w_SvGms", type text}, {"w_bpSaved", type text}, {"w_bpFaced", type text}, {"l_ace", type text}, {"l_df", type text}, {"l_svpt", type text}, {"l_1stIn", type text}, {"l_1stWon", type text}, {"l_2ndWon", type text}, {"l_SvGms", type text}, {"l_bpSaved", type text}, {"l_bpFaced", type text}, {"year", Int64.Type}}),
+		    #"Columnas con nombre cambiado1" = Table.RenameColumns(#"Tipo cambiado",{{"winner_seed", "1_seed"}, {"winner_entry", "1_entry"}, {"winner_name", "1_name"}, {"winner_hand", "1_hand"}, {"winner_ht", "1_ht"}, {"winner_ioc", "1_ioc"}, {"winner_age", "1_age"}, {"winner_rank", "1_rank"}, {"winner_rank_points", "1_rank_points"}, {"winner_id", "1_id"}, {"loser_id", "2_id"}, {"loser_seed", "2_seed"}, {"loser_entry", "2_entry"}, {"loser_name", "2_name"}, {"loser_hand", "2_hand"}, {"loser_ht", "2_ht"}, {"loser_ioc", "2_ioc"}, {"loser_age", "2_age"}, {"loser_rank", "2_rank"}, {"loser_rank_points", "2_rank_points"}, {"w_ace", "1_ace"}, {"w_df", "1_df"}, {"w_svpt", "1_svpt"}, {"w_1stIn", "1_1stIn"}, {"w_1stWon", "1_1stWon"}, {"w_2ndWon", "1_2ndWon"}, {"w_SvGms", "1_SvGms"}, {"w_bpSaved", "1_bpSaved"}, {"w_bpFaced", "1_bpFaced"}, {"l_ace", "2_ace"}, {"l_df", "2_df"}, {"l_svpt", "2_svpt"}, {"l_1stIn", "2_1stIn"}, {"l_1stWon", "2_1stWon"}, {"l_2ndWon", "2_2ndWon"}, {"l_SvGms", "2_SvGms"}, {"l_bpSaved", "2_bpSaved"}, {"l_bpFaced", "2_bpFaced"}}),
+		    #"Personalizada agregada2" = Table.AddColumn(#"Columnas con nombre cambiado1", "W/L", each "W", type text)
+		in
+		    #"Personalizada agregada2"
+		```
+	lineageTag: fc75ca85-8f65-48d8-80b7-a504b205301b
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression get_atp_matches = ```
+		(link as text) =>
+		let
+		    Origen = Csv.Document(Web.Contents("https://raw.githubusercontent.com", [RelativePath=link]),[Delimiter=",", Columns=49, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+		    #"Encabezados promovidos" = Table.PromoteHeaders(Origen, [PromoteAllScalars=true])
+		    
+		in
+		    #"Encabezados promovidos"
+		```
+	lineageTag: 0c856473-cab6-4b19-9142-9c678910366f
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Function
+
+expression atp_matches_L = ```
+		let
+		    StartDate = 1968,
+		    EndDate = Date.Year(DateTime.LocalNow()),
+		//Get the number of dates that will be required for the table
+		    GetDateCount = (EndDate - StartDate)+1,
+		//Take the count of dates and turn it into a list of dates
+		    GetDateList = List.Numbers(StartDate, GetDateCount, 1),
+		    #"Convertida en tabla" = Table.FromList(GetDateList, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+		    #"Personalizada agregada" = Table.AddColumn(#"Convertida en tabla", "Link", each Text.Combine({"JeffSackmann/tennis_atp/master/atp_matches_",Text.From([Column1]),".csv"}, "")),
+		    #"Personalizada agregada1" = Table.AddColumn(#"Personalizada agregada", "Data", each scalar_vector([Link])),
+		    #"Se expandió Data" = Table.ExpandTableColumn(#"Personalizada agregada1", "Data", {"tourney_id", "tourney_name", "surface", "draw_size", "tourney_level", "tourney_date", "match_num", "winner_id", "winner_seed", "winner_entry", "winner_name", "winner_hand", "winner_ht", "winner_ioc", "winner_age", "winner_rank", "winner_rank_points", "loser_id", "loser_seed", "loser_entry", "loser_name", "loser_hand", "loser_ht", "loser_ioc", "loser_age", "loser_rank", "loser_rank_points", "score", "best_of", "round", "minutes", "w_ace", "w_df", "w_svpt", "w_1stIn", "w_1stWon", "w_2ndWon", "w_SvGms", "w_bpSaved", "w_bpFaced", "l_ace", "l_df", "l_svpt", "l_1stIn", "l_1stWon", "l_2ndWon", "l_SvGms", "l_bpSaved", "l_bpFaced"}, {"tourney_id", "tourney_name", "surface", "draw_size", "tourney_level", "tourney_date", "match_num", "winner_id", "winner_seed", "winner_entry", "winner_name", "winner_hand", "winner_ht", "winner_ioc", "winner_age", "winner_rank", "winner_rank_points", "loser_id", "loser_seed", "loser_entry", "loser_name", "loser_hand", "loser_ht", "loser_ioc", "loser_age", "loser_rank", "loser_rank_points", "score", "best_of", "round", "minutes", "w_ace", "w_df", "w_svpt", "w_1stIn", "w_1stWon", "w_2ndWon", "w_SvGms", "w_bpSaved", "w_bpFaced", "l_ace", "l_df", "l_svpt", "l_1stIn", "l_1stWon", "l_2ndWon", "l_SvGms", "l_bpSaved", "l_bpFaced"}),
+		    #"Filtered Rows" = Table.SelectRows(#"Se expandió Data", each [loser_name] = "Roger Federer"),
+		    #"Columnas con nombre cambiado" = Table.RenameColumns(#"Filtered Rows",{{"Column1", "year"}}),
+		    Personalizado1 = // Multiples reemplazos de Meses.		
+		let
+		    Source = #"Columnas con nombre cambiado",
+		    Substitutions = [
+		        #"G" = "Grand Slams",
+		        #"M" = "Masters 100s", 
+		        #"A" = "other tour-level events", 
+		        #"C" = "Challengers", 
+		        #"S" = "Satellites/ITFs", 
+		        #"F" = "Tour finals",
+		        #"D" = "Davis Cup"],
+		    Substituted = Table.TransformColumns(Source, {{"tourney_level", each Record.FieldOrDefault(Substitutions, Text.From(_), _)}})
+		in
+		    Substituted,
+		    #"Tipo cambiado" = Table.TransformColumnTypes(Personalizado1,{{"tourney_id", type text}, {"tourney_name", type text}, {"surface", type text}, {"draw_size", Int64.Type}, {"tourney_level", type text}, {"tourney_date", type date}, {"match_num", Int64.Type}, {"winner_id", Int64.Type}, {"winner_seed", Int64.Type}, {"winner_entry", type text}, {"winner_name", type text}, {"winner_hand", type text}, {"winner_ht", Int64.Type}, {"winner_ioc", type text}, {"winner_age", Int64.Type}, {"winner_rank", type text}, {"winner_rank_points", type text}, {"loser_id", Int64.Type}, {"loser_seed", Int64.Type}, {"loser_entry", type text}, {"loser_name", type text}, {"loser_hand", type text}, {"loser_ht", Int64.Type}, {"loser_ioc", type text}, {"loser_age", Int64.Type}, {"loser_rank", type text}, {"loser_rank_points", type text}, {"score", type text}, {"best_of", Int64.Type}, {"round", type text}, {"minutes", type text}, {"w_ace", type text}, {"w_df", type text}, {"w_svpt", type text}, {"w_1stIn", type text}, {"w_1stWon", type text}, {"w_2ndWon", type text}, {"w_SvGms", type text}, {"w_bpSaved", type text}, {"w_bpFaced", type text}, {"l_ace", type text}, {"l_df", type text}, {"l_svpt", type text}, {"l_1stIn", type text}, {"l_1stWon", type text}, {"l_2ndWon", type text}, {"l_SvGms", type text}, {"l_bpSaved", type text}, {"l_bpFaced", type text}, {"year", Int64.Type}}),
+		    #"Columnas con nombre cambiado1" = Table.RenameColumns(#"Tipo cambiado",{{"winner_seed", "2_seed"}, {"winner_entry", "2_entry"}, {"winner_name", "2_name"}, {"winner_hand", "2_hand"}, {"winner_ht", "2_ht"}, {"winner_ioc", "2_ioc"}, {"winner_age", "2_age"}, {"winner_rank", "2_rank"}, {"winner_rank_points", "2_rank_points"}, {"winner_id", "2_id"}, {"loser_id", "1_id"}, {"loser_seed", "1_seed"}, {"loser_entry", "1_entry"}, {"loser_name", "1_name"}, {"loser_hand", "1_hand"}, {"loser_ht", "1_ht"}, {"loser_ioc", "1_ioc"}, {"loser_age", "1_age"}, {"loser_rank", "1_rank"}, {"loser_rank_points", "1_rank_points"}, {"w_ace", "2_ace"}, {"w_df", "2_df"}, {"w_svpt", "2_svpt"}, {"w_1stIn", "2_1stIn"}, {"w_1stWon", "2_1stWon"}, {"w_2ndWon", "2_2ndWon"}, {"w_SvGms", "2_SvGms"}, {"w_bpSaved", "2_bpSaved"}, {"w_bpFaced", "2_bpFaced"}, {"l_ace", "1_ace"}, {"l_df", "1_df"}, {"l_svpt", "1_svpt"}, {"l_1stIn", "1_1stIn"}, {"l_1stWon", "1_1stWon"}, {"l_2ndWon", "1_2ndWon"}, {"l_SvGms", "1_SvGms"}, {"l_bpSaved", "1_bpSaved"}, {"l_bpFaced", "1_bpFaced"}}),
+		    #"Personalizada agregada2" = Table.AddColumn(#"Columnas con nombre cambiado1", "W/L", each "L", type text)
+		in
+		    #"Personalizada agregada2"
+		```
+	lineageTag: f85eca09-98cc-48ac-be44-75062647221e
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression list_transform = ```
+		let
+		    Origen = (InputText as list) =>
+		    List.Transform(
+		        InputText, 
+		        each get_atp_matches(_)
+		        )
+		in
+		    Origen
+		```
+	lineageTag: 564d3db6-aae4-44b7-add0-2d944a80cfa1
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Function
+
+expression scalar_vector = ```
+		let
+		    Origen = Function.ScalarVector(
+		    type function(Años as text) as text,
+		    (InputTable) =>
+		        let
+		            BufferTable = Table.Buffer(InputTable),
+		            InputList = BufferTable[Años],
+		            CallFunction = list_transform(InputList)            
+		        in
+		            CallFunction
+		)
+		in
+		    Origen
+		```
+	lineageTag: ddc0a2c6-bf37-4ae3-a650-4ab59931b609
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Function
+
+expression get_atp_matches_sinCol = ```
+		(link as text, rela as text) =>
+		let
+		    Origen = Csv.Document(Web.Contents(link, [RelativePath=rela]),[Delimiter=",", Columns=6, Encoding=65001, QuoteStyle=QuoteStyle.None])
+		    
+		in
+		    Origen
+		```
+	lineageTag: cdf3bc24-9f83-4002-a3a4-3da1438958ed
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Function
+
+expression PingGithub =
+		let
+		    Source = Web.Contents("https://github.com/JeffSackmann/tennis_atp")
+		in
+		    Source
+	lineageTag: 9a2b5d9d-e316-4767-b41c-c5d7c9324dde
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Binary
+
+expression PingGithubRaw =
+		let
+		    Source = Web.Contents("https://raw.githubusercontent.com/")
+		in
+		    Source
+	lineageTag: 35b969e8-cf07-4942-a3a3-82c7c213563c
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Binary
+

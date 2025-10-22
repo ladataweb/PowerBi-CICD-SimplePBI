@@ -1,0 +1,30 @@
+model Model
+	culture: es-ES
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: es-AR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["atp_matches_W","get_atp_matches","atp_matches_qual_chall","atp_players","atp_rank","year","atp_matches_L","atp_matches","list_transform","scalar_vector","atp_rank_sincolumnas","get_atp_matches_sinCol","atp_rank_concolumnas","PingGithub","PingGithubRaw","Stats"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table DateTableTemplate_9318945a-709a-49bc-a64c-7237f84f4bb1
+ref table atp_matches_qual_chall
+ref table atp_players
+ref table atp_rank
+ref table LocalDateTable_312d84f9-867e-4f82-8afd-d42dabf58826
+ref table year
+ref table atp_matches
+ref table LocalDateTable_ac07daf6-afb9-451c-8619-12d7eceb8803
+ref table atp_rank_sincolumnas
+ref table LocalDateTable_6d967402-b92c-4825-85e8-5117b639699f
+ref table atp_rank_concolumnas
+ref table LocalDateTable_5f12a5cf-dc31-4cff-b4d0-a5a902b9242b
+ref table Stats
+
+ref cultureInfo es-ES
+

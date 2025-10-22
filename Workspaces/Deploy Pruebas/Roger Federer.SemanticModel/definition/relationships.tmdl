@@ -1,0 +1,48 @@
+relationship a01fe21f-2563-4dd8-8fe7-859c1fb24673
+	joinOnDateBehavior: datePartOnly
+	fromColumn: atp_rank.ranking_date
+	toColumn: LocalDateTable_312d84f9-867e-4f82-8afd-d42dabf58826.Date
+
+relationship 206af6e2-b135-4802-b27a-0732e6d4d9bf
+	fromColumn: atp_matches_qual_chall.year
+	toColumn: year.Año
+
+relationship 4ca1c277-7ab3-49eb-b7be-5cd2c70ef1b8
+	fromColumn: atp_rank.year
+	toColumn: year.Año
+
+relationship fdd84dc4-e6bd-4959-ad58-eadd71e6e0e8
+	joinOnDateBehavior: datePartOnly
+	fromColumn: atp_matches.'Fecha de Torneo'
+	toColumn: LocalDateTable_ac07daf6-afb9-451c-8619-12d7eceb8803.Date
+
+relationship 2ae8c9b6-3e5b-446e-93a1-4cfb48b5e9d5
+	fromColumn: atp_matches.Año
+	toColumn: year.Año
+
+relationship f3177993-4f3d-424f-a924-af54063b358e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: atp_rank_sincolumnas.ranking_date
+	toColumn: LocalDateTable_6d967402-b92c-4825-85e8-5117b639699f.Date
+
+relationship ffd3cd52-cee1-4263-9725-3ad4091b6d29
+	joinOnDateBehavior: datePartOnly
+	fromColumn: atp_rank_concolumnas.ranking_date
+	toColumn: LocalDateTable_5f12a5cf-dc31-4cff-b4d0-a5a902b9242b.Date
+
+relationship c318a8b1-4847-405f-b11f-0d8c0024d142
+	fromColumn: atp_rank.player
+	toColumn: atp_players.player_id
+
+relationship 9c13839f-9e7a-43ad-ad0c-6d59e5c2ad0c
+	fromColumn: atp_rank_sincolumnas.player
+	toColumn: atp_players.player_id
+
+relationship e6844d2c-6f32-48a9-95ce-2ed19b637388
+	fromColumn: atp_rank_concolumnas.player
+	toColumn: atp_players.player_id
+
+relationship 14358996-fbd4-46c7-815d-aa0f10a22a42
+	fromColumn: atp_matches.1_id
+	toColumn: atp_players.player_id
+

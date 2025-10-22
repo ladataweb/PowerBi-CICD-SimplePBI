@@ -1,0 +1,117 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
+  "name": "ReportSectiond5e26b2f839aeb56c7a3",
+  "displayName": "GeneralStatsOLD",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "objects": {
+    "outspace": [
+      {
+        "properties": {
+          "image": {
+            "image": {
+              "name": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'Tenis-bg.png'"
+                  }
+                }
+              },
+              "url": {
+                "expr": {
+                  "ResourcePackageItem": {
+                    "PackageName": "RegisteredResources",
+                    "PackageType": 1,
+                    "ItemName": "Tenis-bg5726738288929836.png"
+                  }
+                }
+              },
+              "scaling": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'Fit'"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "background": [
+      {
+        "properties": {
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "100D"
+              }
+            }
+          },
+          "image": {
+            "image": {
+              "name": {
+                "expr": {
+                  "Literal": {
+                    "Value": "''"
+                  }
+                }
+              },
+              "url": {
+                "expr": {
+                  "Literal": {
+                    "Value": "''"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "visibility": "HiddenInViewMode",
+  "visualInteractions": [
+    {
+      "source": "037a8c99eb56704f5cc2",
+      "target": "5e10555e6d7678b8339a",
+      "type": "NoFilter"
+    },
+    {
+      "source": "037a8c99eb56704f5cc2",
+      "target": "62e2c3c52d49db171177",
+      "type": "NoFilter"
+    },
+    {
+      "source": "037a8c99eb56704f5cc2",
+      "target": "cb5cea4a6c231637df01",
+      "type": "NoFilter"
+    },
+    {
+      "source": "037a8c99eb56704f5cc2",
+      "target": "8f66587d67afc7384700",
+      "type": "NoFilter"
+    },
+    {
+      "source": "037a8c99eb56704f5cc2",
+      "target": "a2ab9ed5b0a2d0792d3c",
+      "type": "NoFilter"
+    },
+    {
+      "source": "037a8c99eb56704f5cc2",
+      "target": "515fdddb2cdb77197bc2",
+      "type": "NoFilter"
+    },
+    {
+      "source": "037a8c99eb56704f5cc2",
+      "target": "793a69f7e3592a971094",
+      "type": "NoFilter"
+    },
+    {
+      "source": "037a8c99eb56704f5cc2",
+      "target": "96d0194d373b4953a3e7",
+      "type": "NoFilter"
+    }
+  ]
+}
