@@ -30,7 +30,7 @@ Workspace = sys.argv[1]
 
 # Get list of file path folders with changes
 list_files = " ".join(sys.argv[5:])
-print("The arguments are: " , str(sys.argv))
+#print("The arguments are: " , str(sys.argv))
 print("The modified files are: " , list_files)
 
 if ".Report" not in list_files and ".SemanticModel" not in list_files and ".Dataset" not in list_files:
@@ -97,17 +97,28 @@ for files in list_files.split(","):
 items_deploy = list(set(sm_items_deploy)) + list(set(re_items_deploy))
 print("Order of items to deploy: " + str(items_deploy) )
 
-
 # Deploy Report or semantic model change by checking files modification at Report or SemanticModel folder.
+workspaces = {}
 for pbi_item in list(items_deploy):
+    wp_name = pbi_item.split("/")[1]
+    if wp_name not in workspaces:
+        try:
+            areas = wp.list_workspaces()
+            workspace_id = [i['id'] for i in areas['value'] if i['displayName']==wp_name and i['type']=="Workspace" ]
+            if workspace_id == []:
+                raise Exception("Workspace {} does not exist.".format(wp_name))
+            workspaces[wp_name] = workspace_id[0]
+        except Exception as e:
+            print("Error: ", e)
+            sys.exit(1)
     try:
         status="Running"
         if ".Report" in pbi_item: # Another alternative check specific folder .split(".")[-1] == "Report"
-            print("Running report deployment to path: " + pbi_item)
-            res = it.simple_deploy_report(workspace_id[0], workspace_id[0], pbi_item)                    
+            print("Running report deployment to path: " + pbi_item + " to workspace id: " + workspaces[wp_name])
+            res = it.simple_deploy_report(workspaces[wp_name], workspaces[wp_name], pbi_item)                    
         else:
-            print("Running semantic model deployment to path: " + pbi_item)                        
-            res = it.simple_deploy_semantic_model(workspace_id[0], pbi_item)
+            print("Running semantic model deployment to path: " + pbi_item + " to workspace id: " + workspaces[wp_name])                        
+            res = it.simple_deploy_semantic_model(workspaces[wp_name], pbi_item)
         print("Running Operation ID check for: " + res.headers['x-ms-operation-id'])
         while status == "Running":
             try:
