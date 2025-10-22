@@ -4,7 +4,7 @@ model Model
 	sourceQueryCulture: es-AR
 	dataAccessOptions
 		legacyRedirects
-		returnErrorValuesAsNull
+		returnErrorValuesAsNull 
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
