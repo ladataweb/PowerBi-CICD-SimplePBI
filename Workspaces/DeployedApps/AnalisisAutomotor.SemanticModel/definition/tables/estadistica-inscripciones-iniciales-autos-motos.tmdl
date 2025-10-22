@@ -5,12 +5,12 @@ table estadistica-inscripciones-iniciales-autos-motos
 		formatString: 0.0000
 		lineageTag: 98498ff4-5b03-4cda-ad0f-470c1ab4b403
 
-	measure 'Prom. Pcia' = SUM('estadistica-inscripciones-iniciales-autos-motos'[cantidad]) / 24 
+	measure 'Prom. Pcia' = SUM('estadistica-inscripciones-iniciales-autos-motos'[cantidad]) / 24
 		lineageTag: c7fd4e78-44b1-4201-aed1-2289fc8e6614
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure CantidadAnterior = CALCULATE( SUM ('estadistica-inscripciones-iniciales-autos-motos'[cantidad] ), SAMEPERIODLASTYEAR ( TablaFecha[Fecha] ) ) 
+	measure CantidadAnterior = CALCULATE( SUM ('estadistica-inscripciones-iniciales-autos-motos'[cantidad] ), SAMEPERIODLASTYEAR ( TablaFecha[Fecha] ) )
 		formatString: #,0
 		lineageTag: 162eb6b7-040a-4402-b144-ba8459f2a492
 
@@ -25,7 +25,7 @@ table estadistica-inscripciones-iniciales-autos-motos
 
 	measure 'Prom. Anual' =
 			
-			DIVIDE( 
+			DIVIDE(
 			    SUM('estadistica-inscripciones-iniciales-autos-motos'[cantidad])
 			    , DISTINCTCOUNT(TablaFecha[Año])
 			)
@@ -68,7 +68,7 @@ table estadistica-inscripciones-iniciales-autos-motos
 		annotation SummarizationSetBy = Automatic
 
 	column UltimoMes =
-			IF(AND( 
+			IF(AND(
 				YEAR('estadistica-inscripciones-iniciales-autos-motos'[Fecha]) = YEAR(LASTDATE(ALL('estadistica-inscripciones-iniciales-autos-motos'[Fecha]))),
 				MONTH('estadistica-inscripciones-iniciales-autos-motos'[Fecha]) = MONTH(LASTDATE(ALL('estadistica-inscripciones-iniciales-autos-motos'[Fecha])) )),
 				"Si",

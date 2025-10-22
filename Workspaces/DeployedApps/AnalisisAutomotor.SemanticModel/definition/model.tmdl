@@ -1,4 +1,4 @@
-model Model   
+model Model
 	culture: es-ES
 	defaultPowerBIDataSourceVersion: powerBI_V3
 	sourceQueryCulture: es-AR
@@ -7,8 +7,6 @@ model Model
 		returnErrorValuesAsNull
 
 annotation __PBI_TimeIntelligenceEnabled = 0
-
-annotation PBIDesktopVersion = 2.138.1004.0 (24.11)
 
 annotation PBI_QueryOrder = ["estadistica-inscripciones-iniciales-autos-motos","Poblacional","URLs","Año","TablaFecha"]
 
@@ -23,5 +21,5 @@ ref role NOA
 ref role NEA
 ref role VerTodo
 
-ref cultureInfo es-ES 
+ref cultureInfo es-ES
 
