@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "LiveToBlog"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "5a5a98ae-c40f-4908-9e38-3db44c6490d1"
+  }
+}

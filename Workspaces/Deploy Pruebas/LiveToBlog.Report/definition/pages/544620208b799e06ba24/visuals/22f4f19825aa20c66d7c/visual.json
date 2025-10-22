@@ -1,0 +1,88 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "name": "22f4f19825aa20c66d7c",
+  "position": {
+    "x": 640,
+    "y": 131.30699088145897,
+    "z": 2,
+    "height": 135.19756838905775,
+    "width": 312.21884498480244
+  },
+  "visual": {
+    "visualType": "card",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "InternetSales"
+                        }
+                      },
+                      "Property": "Order Date"
+                    }
+                  },
+                  "Function": 2
+                }
+              },
+              "queryRef": "Min(InternetSales.Order Date)",
+              "nativeQueryRef": "Count of Order Date"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Aggregation": {
+                "Expression": {
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "InternetSales"
+                      }
+                    },
+                    "Property": "Order Date"
+                  }
+                },
+                "Function": 2
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "58a059b9a25f7e804565",
+        "field": {
+          "Aggregation": {
+            "Expression": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "InternetSales"
+                  }
+                },
+                "Property": "Order Date"
+              }
+            },
+            "Function": 2
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}
