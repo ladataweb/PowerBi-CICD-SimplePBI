@@ -11,7 +11,7 @@ table estadistica-inscripciones-iniciales-autos-motos
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure CantidadAnterior = ```
-			CALCULATE( SUM ('estadistica-inscripciones-iniciales-autos-motos'[cantidad] ), SAMEPERIODLASTYEAR ( TablaFecha[Fecha] ) )  
+			CALCULATE( SUM ('estadistica-inscripciones-iniciales-autos-motos'[cantidad] ), SAMEPERIODLASTYEAR ( TablaFecha[Fecha] ) )   
 			```
 		formatString: #,0
 		lineageTag: 162eb6b7-040a-4402-b144-ba8459f2a492
@@ -21,7 +21,7 @@ table estadistica-inscripciones-iniciales-autos-motos
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure Alerta = 103
+	measure Alerta = 105
 		formatString: 0
 		lineageTag: 79a8c54b-94dd-4220-a858-34d18b8e3722
 

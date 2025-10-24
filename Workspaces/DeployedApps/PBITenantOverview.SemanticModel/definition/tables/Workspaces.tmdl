@@ -5,7 +5,7 @@ table Workspaces
 			
 			IF(  
 			    SELECTEDVALUE(Workspaces[isOnDedicatedCapacity]) = TRUE(), "Dedicated Capacity", "Shared Capacity"
-			)
+			) 
 		lineageTag: ef7cf0c6-684d-4d10-ba63-60ebabd56970
 
 	measure isValid =

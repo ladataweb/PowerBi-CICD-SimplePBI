@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
   "name": "VisualContainer4",
   "position": {
     "x": 336,
@@ -22,10 +22,11 @@
                       "Entity": "estadistica-inscripciones-iniciales-autos-motos"
                     }
                   },
-                  "Property": "Prom. Pcia"
+                  "Property": "Alerta"
                 }
               },
-              "queryRef": "estadistica-inscripciones-iniciales-autos-motos.Prom. Pcia"
+              "queryRef": "estadistica-inscripciones-iniciales-autos-motos.Alerta",
+              "nativeQueryRef": "Alerta"
             }
           ]
         }
