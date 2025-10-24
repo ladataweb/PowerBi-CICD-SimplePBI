@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.4.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
   "name": "VisualContainer6",
   "position": {
     "x": 16,
@@ -79,16 +79,16 @@
         "sort": [
           {
             "field": {
-              "Measure": {
+              "Column": {
                 "Expression": {
                   "SourceRef": {
-                    "Entity": "estadistica-inscripciones-iniciales-autos-motos"
+                    "Entity": "Poblacional"
                   }
                 },
-                "Property": "Prom.Habitante"
+                "Property": "Población (1)"
               }
             },
-            "direction": "Descending"
+            "direction": "Ascending"
           }
         ]
       }
