@@ -13,7 +13,7 @@ jobs:
 
     steps:
       - name: CallSimplePBI-Ops
-        uses: ladataweb/SimplePBI-Ops@v0.0.4
+        uses: ladataweb/SimplePBI-Ops@v0.0.5
 
         with:
           custom-text: "Hi, running the SimplePBI Ops process..."
