@@ -13,7 +13,7 @@ jobs:
 
     steps:
       - name: Run SimplePBI Ops
-        uses: ladataweb/SimplePBI-Ops@v0.0.6
+        uses: ladataweb/SimplePBI-Ops@v0.0.7
         with:
           TENANT_ID : ${{ secrets.TENANT_ID  }}
           APP_ID : ${{ secrets.APP_ID  }}
