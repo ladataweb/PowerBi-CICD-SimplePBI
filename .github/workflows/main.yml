@@ -12,12 +12,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: CallSimplePBI-Ops
-        uses: ladataweb/SimplePBI-Ops@v0.0.5
-
+      - name: Run SimplePBI Ops
+        uses: ladataweb/SimplePBI-Ops@v0.0.6
         with:
-          custom-text: "Hi, running the SimplePBI Ops process..."
-        env:
           TENANT_ID : ${{ secrets.TENANT_ID  }}
           APP_ID : ${{ secrets.APP_ID  }}
           SECRET_KEY : ${{ secrets.SECRET_KEY  }}
