@@ -30,25 +30,10 @@ Workspace = sys.argv[1]
 
 # Get list of file path folders with changes
 list_files = " ".join(sys.argv[5:])
-#print("The arguments are: " , str(sys.argv))
 print("The modified files are: " , list_files)
 
 if ".Report" not in list_files and ".SemanticModel" not in list_files and ".Dataset" not in list_files:
     sys.exit()
-
-
-try:
-    Workspace_Name = list_files.split(",")[0].split("/")[:-1][1]
-except IndexError as e:
-    print("Caught IndexError list out of index, proceding alternative method.")
-    Workspace_Name = list_files.split(",")[0].split("/")[1]
-
-# Show extraction
-print("Folder_Name/Workspace: " + Workspace_Name, "\nFolders: " + str(list_files))
-
-# Get list of files to import
-#list_files = [item for item in Files.split(",") if item[-4:]=="pbix" and item.split("/")[0] ==Folder_Name]
-#print("list_files: " + str(list_files))
 
 # Log into Power BI
 TENANT_ID = sys.argv[2]
@@ -64,17 +49,7 @@ it = core.Items(t.token)
 wp = core.Workspaces(t.token)
 lg = core.LongRunningOperations(t.token)
 
-# Find workspace id by name
-try:
-    areas = wp.list_workspaces(roles="admin, member, contributor, viewer")
-    workspace_id = [i['id'] for i in areas['value'] if i['displayName']==Workspace_Name and i['type']=="Workspace" ]
-    if workspace_id == []:
-        raise Exception("Workspace {} does not exist.".format(Workspace_Name))
-except Exception as e:
-    print("Error: ", e)
-    sys.exit(1)
-
-print("Token generated.\nWorkspace id found: " + str(workspace_id))
+print("Token generated.")
 
 # Remove text after .SemanticModel or .Report to optimize deployment when modify multiple files of single item
 sm_items_deploy = []
