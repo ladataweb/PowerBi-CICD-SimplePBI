@@ -21,7 +21,7 @@ table estadistica-inscripciones-iniciales-autos-motos
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure Alerta = 107
+	measure Alerta = 108
 		formatString: 0
 		lineageTag: 79a8c54b-94dd-4220-a858-34d18b8e3722
 
