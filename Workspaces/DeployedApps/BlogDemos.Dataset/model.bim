@@ -1,14 +1,10 @@
-{  
+{
   "compatibilityLevel": 1567,
   "model": {
     "annotations": [
       {
         "name": "__PBI_TimeIntelligenceEnabled",
         "value": "0"
-      },
-      {
-        "name": "PBIDesktopVersion",
-        "value": "2.118.621.0 (23.06)"
       },
       {
         "name": "PBI_QueryOrder",
@@ -25,7 +21,6 @@
         "name": "es-ES",
         "linguisticMetadata": {
           "content": {
-            "DynamicImprovement": "HighConfidence",
             "Language": "en-US",
             "Version": "1.0.0"
           },
