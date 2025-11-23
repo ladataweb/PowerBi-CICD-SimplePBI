@@ -1,0 +1,133 @@
+{
+  "compatibilityLevel": 1550,
+  "model": {
+    "annotations": [
+      {
+        "name": "__PBI_TimeIntelligenceEnabled",
+        "value": "0"
+      },
+      {
+        "name": "PBI_QueryOrder",
+        "value": "[\"Fund\"]"
+      },
+      {
+        "name": "PBI_ProTooling",
+        "value": "[\"DevMode\"]"
+      }
+    ],
+    "culture": "en-US",
+    "cultures": [
+      {
+        "name": "en-US",
+        "linguisticMetadata": {
+          "content": {
+            "Language": "en-US",
+            "Version": "1.0.0"
+          },
+          "contentType": "json"
+        }
+      }
+    ],
+    "dataAccessOptions": {
+      "legacyRedirects": true,
+      "returnErrorValuesAsNull": true
+    },
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "sourceQueryCulture": "es-AR",
+    "tables": [
+      {
+        "name": "Fund",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Fund",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "be1c9e1c-8282-4865-9c46-960cb4f29cc0",
+            "sourceColumn": "Fund",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Periodo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "c3b5d152-9e48-4e35-8e56-b33e6021e18d",
+            "sourceColumn": "Periodo",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Guita",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "#,0",
+            "lineageTag": "0b2270d8-091e-4874-9115-a89caa5da582",
+            "sourceColumn": "Guita",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "SiNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "1cba11cb-0b14-49e4-85ac-028dc8b5f8b0",
+            "sourceColumn": "SiNo",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "8fa5b5d6-eaff-430c-9fe7-9c2f764fc840",
+        "measures": [
+          {
+            "name": "Concat Funds",
+            "expression": "CONCATENATEX(Fund, Fund[Fund], \", \")",
+            "lineageTag": "d49c6dd4-04e4-479c-a8e1-169e4c3b476e"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Fund",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText(\"jdA9D4IwEIDhv9J0doB+wDkaHY0h0ehAHKp2wKCQQtWfL6lGWpPSbpf05XI8ZYmLCs8wSQhPk2FglNGMD8O2wsdZidcCrUQv0FOe7CwljLCxWtStOAsk2rZzqzEpKqVR15yURErLi3BCe9dSXpyLOMsZh3yYNo0Jdkpfq7punAWUjcHiIe+9VsLZQugYHOStebmHZtxasNe1+yOUZfb3P7JkHkVmsiDZtwqTmdBDZt5CZJ8FE2SfLT6y76FeMvPuJYM4Mogig1gymCCDGDIIkcEkGQTI4I/s+AY=\", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Fund = _t, Periodo = _t, Guita = _t, SiNo = _t]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(Source,{{\"Fund\", type text}, {\"Periodo\", Int64.Type}, {\"Guita\", Int64.Type}, {\"SiNo\", type text}})",
+                "in",
+                "    #\"Changed Type\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
