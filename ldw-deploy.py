@@ -87,7 +87,7 @@ for pbi_item in list(items_deploy):
             areas = wp.list_workspaces()
             workspace_id = [i['id'] for i in areas['value'] if i['displayName']==wp_name and i['type']=="Workspace" ]
             if workspace_id == []:
-                raise Exception("Workspace {} does not exist.".format(wp_name))
+                raise Exception("Workspace {} does not exist or the service principal doesn't have permission to read write on it.".format(wp_name))
             workspaces[wp_name] = workspace_id[0]
         except Exception as e:
             print("Error: ", e)
