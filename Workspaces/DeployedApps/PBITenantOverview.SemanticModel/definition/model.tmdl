@@ -30,7 +30,7 @@ annotation PBI_ProTooling = ["DevMode"]
 
 ref table Dataflows
 ref table Apps
-ref table Users_Workspaces
+ref table Users_Workspaces 
 ref table Workspaces
 ref table Reports
 ref table Datasets
