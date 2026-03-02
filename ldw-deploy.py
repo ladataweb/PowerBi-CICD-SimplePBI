@@ -24,10 +24,6 @@ import json
 from simplepbi import token
 from simplepbi.fabric import core
 
-# Set variables
-Throw_exception = ""
-Workspace = sys.argv[2]
-
 # Get list of file path folders with changes
 list_files = " ".join(sys.argv[6:])
 print("The modified files are: " , list_files)
