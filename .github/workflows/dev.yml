@@ -3,7 +3,7 @@ name: SimplePBI-Ops-Deploy
 on:
   push:
     branches:
-      - main
+      - dev
     paths:
       - 'Workspaces/**'  # Trigger only when there's a change in this folder
 
@@ -13,7 +13,7 @@ jobs:
     
     # Set your prefiex target for environment workspace. If your folder name is Workspace Sales and the dev environment workspace is Workspace Sales - Dev, write " - Dev" value for the variable
     env:
-      DEPLOY_ENV: ""
+      DEPLOY_ENV: "_Dev"
 
     steps:
       # Step 1: Checkout the code

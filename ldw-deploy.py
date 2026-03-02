@@ -26,19 +26,25 @@ from simplepbi.fabric import core
 
 # Set variables
 Throw_exception = ""
-Workspace = sys.argv[1]
+Workspace = sys.argv[2]
 
 # Get list of file path folders with changes
-list_files = " ".join(sys.argv[5:])
+list_files = " ".join(sys.argv[6:])
 print("The modified files are: " , list_files)
 
 if ".Report" not in list_files and ".SemanticModel" not in list_files and ".Dataset" not in list_files:
     sys.exit()
+    
+environment = sys.argv[2]
+if environment != None or environment != "":
+    print("Deploying to environment: ", environment)
+else:
+    print("No environment passed.")
 
 # Log into Power BI
-TENANT_ID = sys.argv[2]
-power_bi_client_id = sys.argv[3]
-power_bi_secret = sys.argv[4]
+TENANT_ID = sys.argv[3]
+power_bi_client_id = sys.argv[4]
+power_bi_secret = sys.argv[5]
 print("Environment Variables loaded.")
 
 # Get token for Fabric API
@@ -75,7 +81,7 @@ print("Order of items to deploy: " + str(items_deploy) )
 # Deploy Report or semantic model change by checking files modification at Report or SemanticModel folder.
 workspaces = {}
 for pbi_item in list(items_deploy):
-    wp_name = pbi_item.split("/")[1]
+    wp_name = pbi_item.split("/")[1]+environment
     if wp_name not in workspaces:
         try:
             areas = wp.list_workspaces()
