@@ -8,7 +8,7 @@ on:
       - 'Workspaces/**'  # Trigger only when there's a change in this folder
 
 jobs:
-  SimplePBI-Ops-Deploy:
+  SimplePBI-Ops-Dev-Deploy:
     runs-on: ubuntu-latest
     
     # Set your prefiex target for environment workspace. If your folder name is Workspace Sales and the dev environment workspace is Workspace Sales - Dev, write " - Dev" value for the variable
