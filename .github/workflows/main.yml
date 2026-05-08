@@ -14,17 +14,18 @@ jobs:
     # Set your prefiex target for environment workspace. If your folder name is Workspace Sales and the dev environment workspace is Workspace Sales - Dev, write " - Dev" value for the variable
     env:
       DEPLOY_ENV: ""
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
       # Step 1: Checkout the code
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
         with:
          fetch-depth: 3
 
       # Step 2: Set up Python environment
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v6
         with:
           python-version: '3.x'
 
@@ -38,27 +39,24 @@ jobs:
       - name: Get changed folders
         id: detect_changes
         run: |
-          # Define the folder to check for changes
-          target_folder="Workspaces/"
+            target_folder="Workspaces/"
 
-          # Get changed folders
-          changed_folders=$(git diff --name-only HEAD^..HEAD -- "$target_folder" | \
-            grep -vE '\.pbip$' | \
-            sed 's|/[^/]*$||' | sort | uniq)
+            changed_folders=$(git diff --name-only "${{ github.event.before }}" "${{ github.sha }}" -- "$target_folder" | \
+              grep -vE '\.pbip$' | \
+              grep -oE '^.*\.(SemanticModel|Report|Dataset)' | \
+              sort -u)
 
-          # Filter only existing folders
-          existing_folders=""
-          while IFS= read -r folder; do
-            if [ -d "$folder" ]; then
-              existing_folders+="$folder"$'\n'
-            fi
-          done <<< "$changed_folders"
+            existing_folders=""
+            while IFS= read -r folder; do
+              if [ -d "$folder" ]; then
+                existing_folders+="$folder"$'\n'
+              fi
+            done <<< "$changed_folders"
 
-          # Remove trailing newline and convert to comma-separated list
-          existing_folders=$(echo "$existing_folders" | sed '/^\s*$/d' | paste -sd "," -)
+            existing_folders=$(echo "$existing_folders" | sed '/^\s*$/d' | paste -sd "," -)
 
-          echo "changed_folders=$existing_folders" >> $GITHUB_ENV
-          echo "Changed folders: $existing_folders"
+            echo "changed_folders=$existing_folders" >> $GITHUB_ENV
+            echo "Changed folders: $existing_folders"
 
       # Step 5: Run the Python script with the list of changed folders and secret key
       - name: Run Python script
