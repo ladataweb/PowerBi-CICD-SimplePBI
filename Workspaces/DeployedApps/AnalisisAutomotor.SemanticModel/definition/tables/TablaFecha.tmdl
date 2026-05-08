@@ -2,7 +2,7 @@ table TablaFecha
 	lineageTag: 9523a96d-41a1-4b5e-80ce-fe5cad33d8b2
 
 	column Fecha
-		dataType: dateTime
+		dataType: dateTime 
 		formatString: Long Date
 		lineageTag: 3c75600d-be66-47eb-8d11-b9f6ef86d29f
 		summarizeBy: none

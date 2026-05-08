@@ -1,5 +1,5 @@
 model Model  
-	culture: es-ES
+	culture: es-ES 
 	defaultPowerBIDataSourceVersion: powerBI_V3
 	sourceQueryCulture: es-AR
 	dataAccessOptions
