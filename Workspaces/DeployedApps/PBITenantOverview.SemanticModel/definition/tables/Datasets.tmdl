@@ -1,0 +1,174 @@
+table Datasets
+	lineageTag: ac902bfe-bb73-402d-968b-46c42ebfbaf9
+
+	measure 'Datasets Names' =
+			
+			CONCATENATEX(Datasets, "- "&Datasets[name], UNICHAR(10) )
+		lineageTag: 26a3a61d-e01b-480b-8f28-6b6a8c21a2a5
+
+	column workspaceId
+		dataType: string
+		lineageTag: 5a266778-fa69-4dc8-a4b3-c80e04680dca
+		summarizeBy: none
+		sourceColumn: workspaceId
+
+		annotation SummarizationSetBy = Automatic
+
+	column id
+		dataType: string
+		lineageTag: fb7dd4e0-cf42-4a59-b752-c48a0ea37e72
+		summarizeBy: none
+		sourceColumn: id
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		lineageTag: 034dc442-ccd2-4c33-9cf3-d090ce4726d2
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column addRowsAPIEnabled
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: aa23d1a9-df0c-478d-b569-b1b128f773df
+		summarizeBy: none
+		sourceColumn: addRowsAPIEnabled
+
+		annotation SummarizationSetBy = Automatic
+
+	column configuredBy
+		dataType: string
+		lineageTag: b3c67771-a17e-46db-8cf6-70e9e1eb7e30
+		summarizeBy: none
+		sourceColumn: configuredBy
+
+		annotation SummarizationSetBy = Automatic
+
+	column isRefreshable
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 67585ed4-ab61-478c-8737-b652d31ec6e1
+		summarizeBy: none
+		sourceColumn: isRefreshable
+
+		annotation SummarizationSetBy = Automatic
+
+	column isEffectiveIdentityRequired
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: c92e9a89-eebd-412b-948f-979be233937f
+		summarizeBy: none
+		sourceColumn: isEffectiveIdentityRequired
+
+		annotation SummarizationSetBy = Automatic
+
+	column isEffectiveIdentityRolesRequired
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: a627aa99-f378-4d79-bb4c-76d07813bfbb
+		summarizeBy: none
+		sourceColumn: isEffectiveIdentityRolesRequired
+
+		annotation SummarizationSetBy = Automatic
+
+	column targetStorageMode
+		dataType: string
+		lineageTag: a8f783fe-99c4-4f77-9fc3-f02448d60893
+		summarizeBy: none
+		sourceColumn: targetStorageMode
+
+		annotation SummarizationSetBy = Automatic
+
+	column createdDate
+		dataType: string
+		lineageTag: 3a386c63-2262-482b-8b65-c7081c84f042
+		summarizeBy: none
+		sourceColumn: createdDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column contentProviderType
+		dataType: string
+		lineageTag: 25c32991-cdfc-4ce4-a0b9-728a9ae9181a
+		summarizeBy: none
+		sourceColumn: contentProviderType
+
+		annotation SummarizationSetBy = Automatic
+
+	column upstreamDatasets
+		dataType: string
+		lineageTag: f868953a-7227-44c0-b4ce-c83e3b33e0d3
+		summarizeBy: none
+		sourceColumn: upstreamDatasets
+
+		annotation SummarizationSetBy = Automatic
+
+	column users
+		dataType: string
+		lineageTag: 4366724e-ceae-42b5-bcdb-925a1fa0aaba
+		summarizeBy: none
+		sourceColumn: users
+
+		annotation SummarizationSetBy = Automatic
+
+	column URL
+		dataType: string
+		lineageTag: 78b66362-577d-4881-bc9b-9d3aec621493
+		dataCategory: WebUrl
+		summarizeBy: none
+		sourceColumn: URL
+
+		annotation SummarizationSetBy = Automatic
+
+	column URL-Settings
+		dataType: string
+		lineageTag: b98b119d-dc75-44f2-907b-2c260649335f
+		dataCategory: WebUrl
+		summarizeBy: none
+		sourceColumn: URL-Settings
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Datasets-ab95fff9-deed-4e60-a670-d93c5276b66f = m
+		mode: import
+		queryGroup: PBIContent
+		source = ```
+				let
+				    Datasets = if is_valid() = "Forbidden" then #table({"workspaceId","id","name","addRowsAPIEnabled","configuredBy","isRefreshable","isEffectiveIdentityRequired","isEffectiveIdentityRolesRequired","targetStorageMode","createdDate","contentProviderType","upstreamDatasets","users","URL","URL-Settings"}, {})
+				else
+				    let
+				        Query1 = Json.Document(Web.Contents("https://api.powerbi.com", 
+				        [
+				            RelativePath="v1.0/myorg/admin/groups",
+				            Query = [
+				                #"$top"= "999",
+				                #"$expand"="datasets"
+				            ],
+				            Headers=[
+				                Authorization=Text.Combine({"Bearer ", AccessToken()}, "")
+				            ]
+				        ])),
+				        value = Query1[value],
+				        #"Converted to Table" = Table.FromList(value, Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+				        #"Expanded Column1" = Table.ExpandRecordColumn(#"Converted to Table", "Column1", {"id", "datasets"}, {"workspaceId", "datasets"}),
+				        #"Expanded datasets" = Table.ExpandListColumn(#"Expanded Column1", "datasets"),
+				        #"Expanded datasets1" = Table.ExpandRecordColumn(#"Expanded datasets", "datasets", {"id", "name", "addRowsAPIEnabled", "configuredBy", "isRefreshable", "isEffectiveIdentityRequired", "isEffectiveIdentityRolesRequired", "targetStorageMode", "createdDate", "contentProviderType", "upstreamDatasets", "users"}, {"id", "name", "addRowsAPIEnabled", "configuredBy", "isRefreshable", "isEffectiveIdentityRequired", "isEffectiveIdentityRolesRequired", "targetStorageMode", "createdDate", "contentProviderType", "upstreamDatasets", "users"}),
+				        #"Filtered Rows" = Table.SelectRows(#"Expanded datasets1", each ([id] <> null)),
+				        #"Extracted Values" = Table.TransformColumns(#"Filtered Rows", {"upstreamDatasets", each Text.Combine(List.Transform(_, Text.From), ","), type text}),
+				        #"Extracted Values1" = Table.TransformColumns(#"Extracted Values", {"users", each Text.Combine(List.Transform(_, Text.From)), type text}),
+				        #"Added Custom" = Table.AddColumn(#"Extracted Values1", "URL", each "https://app.powerbi.com/groups/"&[workspaceId]&"/datasets/"&[id]&"/details"),
+				        #"Added Custom1" = Table.AddColumn(#"Added Custom", "URL-Settings", each "https://app.powerbi.com/groups/"&[workspaceId]&"/settings/datasets/"&[id]),
+				        #"Changed Type" = Table.TransformColumnTypes(#"Added Custom1",{{"id", type text}, {"name", type text}, {"addRowsAPIEnabled", type logical}, {"configuredBy", type text}, {"isRefreshable", type logical}, {"isEffectiveIdentityRequired", type logical}, {"isEffectiveIdentityRolesRequired", type logical}, {"targetStorageMode", type text}, {"createdDate", type text}, {"contentProviderType", type text}, {"workspaceId", type text}, {"URL", type text}, {"URL-Settings", type text}})
+				    in
+				        #"Changed Type"
+				in
+				    Datasets
+				```
+
+	annotation PBI_ResultType = Exception
+
+	annotation PBI_NavigationStepName = Navigation
+

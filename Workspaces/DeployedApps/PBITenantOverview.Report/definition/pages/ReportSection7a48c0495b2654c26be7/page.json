@@ -1,0 +1,10 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
+  "name": "ReportSection7a48c0495b2654c26be7",
+  "displayName": "WorkspaceData",
+  "displayOption": "ActualSize",
+  "height": 200,
+  "width": 248,
+  "visibility": "HiddenInViewMode",
+  "type": "Tooltip"
+}

@@ -1,0 +1,10 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
+  "name": "ReportSectionf8ed23e9801485dbece9",
+  "displayName": "ReportTooltip",
+  "displayOption": "ActualSize",
+  "height": 80,
+  "width": 430,
+  "visibility": "HiddenInViewMode",
+  "type": "Tooltip"
+}

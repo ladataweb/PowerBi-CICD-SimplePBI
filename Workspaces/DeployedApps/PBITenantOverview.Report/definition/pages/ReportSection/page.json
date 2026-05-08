@@ -1,0 +1,70 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
+  "name": "ReportSection",
+  "displayName": "Workspaces",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "objects": {
+    "background": [
+      {
+        "properties": {
+          "image": {
+            "image": {
+              "name": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'bg-ldw-darktheme.png'"
+                  }
+                }
+              },
+              "url": {
+                "expr": {
+                  "ResourcePackageItem": {
+                    "PackageName": "RegisteredResources",
+                    "PackageType": 1,
+                    "ItemName": "bg-ldw-darktheme09435279874084213.png"
+                  }
+                }
+              },
+              "scaling": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'Fit'"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "visualInteractions": [
+    {
+      "source": "9c5ebc776b773aa9a62c",
+      "target": "4a656e6208c83e1085eb",
+      "type": "NoFilter"
+    },
+    {
+      "source": "4ac048800cb448989282",
+      "target": "4a656e6208c83e1085eb",
+      "type": "NoFilter"
+    },
+    {
+      "source": "973fc500f5dbb2dbe8b4",
+      "target": "4a656e6208c83e1085eb",
+      "type": "NoFilter"
+    },
+    {
+      "source": "23557ccea0b67dcea9cf",
+      "target": "4a656e6208c83e1085eb",
+      "type": "NoFilter"
+    },
+    {
+      "source": "ab95dabf3cd31e26c438",
+      "target": "4a656e6208c83e1085eb",
+      "type": "NoFilter"
+    }
+  ]
+}
