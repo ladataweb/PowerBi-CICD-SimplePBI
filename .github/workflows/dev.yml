@@ -18,7 +18,7 @@ jobs:
     steps:
       # Step 1: Checkout the code
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
          fetch-depth: 3
 
@@ -38,27 +38,28 @@ jobs:
       - name: Get changed folders
         id: detect_changes
         run: |
-          # Define the folder to check for changes
           target_folder="Workspaces/"
 
-          # Get changed folders
+          # 1. Get changed files
+          # 2. Filter for specific Power BI project folders
+          # 3. Use sed to capture everything up to the supported extensions and discard the rest
+          # 4. Sort and Uniq handles the "show folder once" requirement
           changed_folders=$(git diff --name-only HEAD^..HEAD -- "$target_folder" | \
-            grep -vE '\.pbip$' | \
-            sed 's|/[^/]*$||' | sort | uniq)
+            grep -iE '\.(Report|SemanticModel|Dataset)/' | \
+            sed -E 's|^(.*?\.(Report|SemanticModel|Dataset)).*|\1|' | \
+            sort | uniq)
 
-          # Filter only existing folders
+          # Filter only existing folders to handle deletions gracefully
           existing_folders=""
           while IFS= read -r folder; do
             if [ -d "$folder" ]; then
-              existing_folders+="$folder"$'\n'
+              [ -n "$existing_folders" ] && existing_folders+=","
+              existing_folders+="$folder"
             fi
           done <<< "$changed_folders"
 
-          # Remove trailing newline and convert to comma-separated list
-          existing_folders=$(echo "$existing_folders" | sed '/^\s*$/d' | paste -sd "," -)
-
           echo "changed_folders=$existing_folders" >> $GITHUB_ENV
-          echo "Changed folders: $existing_folders"
+          echo "Filtered folders: $existing_folders"
 
       # Step 5: Run the Python script with the list of changed folders and secret key
       - name: Run Python script
