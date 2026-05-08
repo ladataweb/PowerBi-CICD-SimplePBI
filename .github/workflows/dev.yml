@@ -18,13 +18,13 @@ jobs:
     steps:
       # Step 1: Checkout the code
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
          fetch-depth: 3
 
       # Step 2: Set up Python environment
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.x'
 
@@ -40,8 +40,9 @@ jobs:
         run: |
             set -e
 
-            # Use github.sha instead of Build.SourceVersion
-            changed_files=$(git diff --name-only "HEAD^" "HEAD" -- SemanticModels/)
+            # Use the GitHub SHA context
+            # Note: This assumes a push event; for PRs use ${{ github.event.pull_request.base.sha }}
+            changed_files=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} -- Reports/ || echo "")
 
             declare -A changed_folders_map
 
@@ -62,11 +63,8 @@ jobs:
 
             echo "Changed folders: $existing_folders"
 
-            # Set as an environment variable for future steps in the SAME job
-            echo "changed_folders=$existing_folders" >> $GITHUB_ENV
-
-            # OR set as a step output to use across different JOBS
-            echo "folders=$existing_folders" >> $GITHUB_OUTPUT
+            # Set GitHub Actions output (modern replacement for set-env/vso task variables)
+            echo "changed_folders=$existing_folders" >> $GITHUB_OUTPUT
 
       # Step 5: Run the Python script with the list of changed folders and secret key
       - name: Run Python script
