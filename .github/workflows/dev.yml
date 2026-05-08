@@ -1,4 +1,4 @@
-name: SimplePBI-Ops-Deploy
+name: SimplePBI-Ops-Deploy-Dev
 
 on:
   push:
@@ -14,6 +14,7 @@ jobs:
     # Set your prefiex target for environment workspace. If your folder name is Workspace Sales and the dev environment workspace is Workspace Sales - Dev, write " - Dev" value for the variable
     env:
       DEPLOY_ENV: "_Dev"
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
       # Step 1: Checkout the code
@@ -38,28 +39,24 @@ jobs:
       - name: Get changed folders
         id: detect_changes
         run: |
-          target_folder="Workspaces/"
+            target_folder="Workspaces/"
 
-          # 1. Get changed files
-          # 2. Filter for specific Power BI project folders
-          # 3. Use sed to capture everything up to the supported extensions and discard the rest
-          # 4. Sort and Uniq handles the "show folder once" requirement
-          changed_folders=$(git diff --name-only HEAD^..HEAD -- "$target_folder" | \
-            grep -iE '\.(Report|SemanticModel|Dataset)/' | \
-            sed -E 's|^(.*?\.(Report|SemanticModel|Dataset)).*|\1|' | \
-            sort | uniq)
+            changed_folders=$(git diff --name-only "${{ github.event.before }}" "${{ github.sha }}" -- "$target_folder" | \
+              grep -vE '\.pbip$' | \
+              grep -oE '^.*\.(SemanticModel|Report|Dataset)' | \
+              sort -u)
 
-          # Filter only existing folders to handle deletions gracefully
-          existing_folders=""
-          while IFS= read -r folder; do
-            if [ -d "$folder" ]; then
-              [ -n "$existing_folders" ] && existing_folders+=","
-              existing_folders+="$folder"
-            fi
-          done <<< "$changed_folders"
+            existing_folders=""
+            while IFS= read -r folder; do
+              if [ -d "$folder" ]; then
+                existing_folders+="$folder"$'\n'
+              fi
+            done <<< "$changed_folders"
 
-          echo "changed_folders=$existing_folders" >> $GITHUB_ENV
-          echo "Filtered folders: $existing_folders"
+            existing_folders=$(echo "$existing_folders" | sed '/^\s*$/d' | paste -sd "," -)
+
+            echo "changed_folders=$existing_folders" >> $GITHUB_ENV
+            echo "Changed folders: $existing_folders"
 
       # Step 5: Run the Python script with the list of changed folders and secret key
       - name: Run Python script
