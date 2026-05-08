@@ -38,33 +38,27 @@ jobs:
       - name: Get changed folders
         id: detect_changes
         run: |
-            set -e
+          # Define the folder to check for changes
+          target_folder="Workspaces/"
 
-            # Use the GitHub SHA context
-            # Note: This assumes a push event; for PRs use ${{ github.event.pull_request.base.sha }}
-            changed_files=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} -- Reports/ || echo "")
+          # Get changed folders
+          changed_folders=$(git diff --name-only HEAD^..HEAD -- "$target_folder" | \
+            grep -vE '\.pbip$' | \
+            sed 's|/[^/]*$||' | sort | uniq)
 
-            declare -A changed_folders_map
+          # Filter only existing folders
+          existing_folders=""
+          while IFS= read -r folder; do
+            if [ -d "$folder" ]; then
+              existing_folders+="$folder"$'\n'
+            fi
+          done <<< "$changed_folders"
 
-            while IFS= read -r file; do
-                [ -z "$file" ] && continue
-                [[ "$file" =~ \.pbip$ ]] && continue
+          # Remove trailing newline and convert to comma-separated list
+          existing_folders=$(echo "$existing_folders" | sed '/^\s*$/d' | paste -sd "," -)
 
-                if [[ "$file" == *".SemanticModel"* ]]; then
-                    folder="${file%%.SemanticModel*}.SemanticModel"
-                    changed_folders_map["$folder"]=1
-                elif [[ "$file" == *".Report"* ]]; then
-                    folder="${file%%.Report*}.Report"
-                    changed_folders_map["$folder"]=1
-                fi
-            done <<< "$changed_files"
-
-            existing_folders=$(IFS=, ; echo "${!changed_folders_map[*]}")
-
-            echo "Changed folders: $existing_folders"
-
-            # Set GitHub Actions output (modern replacement for set-env/vso task variables)
-            echo "changed_folders=$existing_folders" >> $GITHUB_OUTPUT
+          echo "changed_folders=$existing_folders" >> $GITHUB_ENV
+          echo "Changed folders: $existing_folders"
 
       # Step 5: Run the Python script with the list of changed folders and secret key
       - name: Run Python script
